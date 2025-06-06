@@ -1,0 +1,10 @@
+{{ define "main" }}
+<table>
+  {{ range .Pages.ByDate.Reverse }}
+  <tr>
+    <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    <td class="date">{{ .Date.Format "01-02-2006" }}</td>
+  </tr>
+  {{ end }}
+</table>
+{{ end }}
