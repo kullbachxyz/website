@@ -1,14 +1,14 @@
 +++
-date = '2025-06-05T19:23:03+02:00'
+date = '2025-06-06T08:23:03+02:00'
 title = 'LANCOM vRouter Config'
 +++
 
 This short guide is about how to configure a [LANCOM vRouter](https://www.lancom-systems.de/produkte/router-sd-wan/central-site-vpn-gateways/lancom-vrouter). I haven't found any proper documentation on how to do it via the CLI, so someone might find this useful.
 
 This guide will cover the following setps:
-1. an IP-Address for it's main INTRANET network
-2. a user with admin rights for configuration via LANconfig
-3. change the second interface, to be used as WAN-Uplink
+1. configure an IP-Address for the main INTRANET network
+2. create a user with admin rights for configuration via LANconfig
+3. change the second interface to be used as WAN-Uplink
 
 ### Prequesites
 LANCON allows you to install thier vRouter, with the LAN-Ports being limited to 1 Mbit/s, until the device is licensed. There is a free 30-day trial [available here](https://my.lancom-systems.de/service-support/registrierungen/demo-lizenzen/).
@@ -58,6 +58,5 @@ cd /Setup/Interfaces/Ethernet-Ports/ETH-2
 ls
 set Assignment LAN-1
 ```
-
 
 You can now use LANconfig to further configure the vRouter.

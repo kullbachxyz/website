@@ -25,7 +25,7 @@ body {
 }
 
 .container a {
-  text-decoration: underline;
+  font-weight: bold;
   color: var(--link);
 }
 
