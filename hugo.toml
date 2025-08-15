@@ -7,3 +7,11 @@ theme = "minilist"
   [markup.highlight]
     noClasses = false
     style = "monokai"
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+
+[params.pgp]
+fingerprint = "F7BD 02B7 E163 0FB4 3702 B169 85B9 BB48 DA04 2B19"
+keyURL = "philipp@kullbach.net.asc"

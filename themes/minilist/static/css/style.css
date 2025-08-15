@@ -24,6 +24,32 @@ body {
   line-height: 1.6;
 }
 
+footer {
+  padding-top: 65px;
+}
+
+/* Simple greyed-out PGP section */
+.pgp {
+  padding-top: 1em;
+  margin-top: 3.5em;
+  text-align: center;
+}
+
+.pgp a {
+  font-size: 0.85rem;
+}
+
+.pgp-fpr {
+  margin-left: 0.5em;
+  white-space: nowrap;
+}
+
+.pgp code {
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+
 .container a {
   font-weight: bold;
   color: var(--link);
