@@ -1,9 +1,9 @@
 +++
 date = '2025-08-15T08:23:14+02:00'
-title = 'Leaving iCloud'
+title = 'Taking Back Control of My Photos with Immich'
 +++
 
-In order to reduce my reliance on cloud hosted services, I have mmade a shift to self-host as much as i can. This post serves as documentation for my latest addition: [Immich](https://immich.app/) as a iCloud Photos replacement.
+In order to reduce my reliance on cloud hosted services, I have made a shift to self-host as much as i can. This post serves as documentation for my latest addition: [Immich](https://immich.app/) as a iCloud Photos replacement.
 
 I am going to assume you have a instance of immich running. If not, its well documented on their site.
 
@@ -24,7 +24,7 @@ docker run -it --rm \
 This downloads all my pictures and videos to `~/icloud-download`.
 
 ### Dealig with Live Photos
-One small annoyance I had was Live Photos. It's a feature on iPhone, that takes a small video with the picture you have taken. I personally don't want those videos to be embedded into the pictures (alltough Immich supports that). Conviniently `icloudpd` splits Live Photos into a JPEG and a MOV file. I used this wuick command to remove all the MOV files from the Live Photos:
+One small annoyance I had was Live Photos. It's a feature on iPhone, that takes a small video with the picture you have taken. I personally don't want those videos to be embedded into the pictures (alltough Immich supports that). Conveniently `icloudpd` splits Live Photos into a JPEG and a MOV file. I used this quick command to remove all the MOV files from the Live Photos:
 ```bash
 find ~/icloud-download/* -type f -iname '*_HEVC.MOV' -delete
 ``` 

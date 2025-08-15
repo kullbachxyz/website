@@ -4,7 +4,7 @@ title: "Philipp's Blog"
 
 *Welcome, web-surfer!*
 
-I'm Philipp — a technologist by trade and a lifelong learner by nature. While I work in tech, my interests extend well beyond the digital.
+I'm Philipp — a technologist by trade and a lifelong learner by nature. I’m Philipp, an IT professional with a strong interest in IT security, Linux, and open-source technologies.
 
 Currently I am working on becoming more mindful of my technology usage, and develop a better understanding of what role technology should have in my life.
 
