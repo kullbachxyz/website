@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: 'IBM Plex Sans', monospace;
+  font-family: monospace;
   background: var(--bg);
   color: var(--fg);
   line-height: 1.6;
