@@ -1,5 +1,5 @@
 +++
-date = '2025-08-15T08:23:14+02:00'
+date = '2025-07-15T08:23:14+02:00'
 title = 'Taking Back Control of My Photos with Immich'
 +++
 
