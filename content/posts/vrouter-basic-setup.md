@@ -1,6 +1,6 @@
 +++
 date = '2025-06-06T08:23:03+02:00'
-title = 'LANCOM vRouter Config'
+title = 'LANCOM vRouter: Basic CLI Setup'
 +++
 
 This short guide is about how to configure a [LANCOM vRouter](https://www.lancom-systems.de/produkte/router-sd-wan/central-site-vpn-gateways/lancom-vrouter). I haven't found any proper documentation on how to do it via the CLI, so someone might find this useful.
@@ -10,13 +10,13 @@ This guide will cover the following setps:
 2. create a user with admin rights for configuration via LANconfig
 3. change the second interface to be used as WAN-Uplink
 
-### Prequesites
-LANCON allows you to install thier vRouter, with the LAN-Ports being limited to 1 Mbit/s, until the device is licensed. There is a free 30-day trial [available here](https://my.lancom-systems.de/service-support/registrierungen/demo-lizenzen/).
-After following the basic [Installation Guide](https://www.lancom-systems.de/download/LC-vRouter/IG_vRouter_DE.pdf) for your desired platform, make sure to add an additional LAN-Port, which will function as the WAN-Uplink.
+### Prerequisites
+Before configuring the vRouter, ensure that the basic setup is complete. By default, LANCOM vRouter limits LAN ports to 1 Mbit/s until install a valid license, but you can request a free 30-day trial [here](https://my.lancom-systems.de/service-support/registrierungen/demo-lizenzen/). After completing the installation for your platform using the official [Installation Guide](https://www.lancom-systems.de/download/LC-vRouter/IG_vRouter_DE.pdf), make sure to add an additional virtual LAN port to your VM. This extra interface will later be used as the WAN uplink.
+
 
 ### Step 1: Set IP Address
 
-Navigate to the TCP/IP network list and assign an IP address to the standard INTRANET network:
+We first need to assign a static IP to the vRouter’s LAN-side so it can be reached from the internal network.
 ```bash
 cd /Setup/TCP-IP/Network-list
 set INTRANET 10.0.99.254 255.255.255.0
