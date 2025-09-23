@@ -34,7 +34,7 @@ With the download and cleanup completed I used [immich-go](https://github.com/si
 You need to create a API key for your Immich account to upload with `immich-go`. You can to that by clicking on your profile icon and navigating to `Account Settings > API Keys > New API Key`
 I used the following command to upload:
 ```bash
-./immich-go upload from-folder --https://photos.domain.com --api-key=1234567890 ~/icloud-download
+./immich-go upload from-folder --server=https://photos.domain.com --api-key=1234567890 ~/icloud-download --pause-immich-jobs=TRUE
 ```
 
 And that's it. Immich also has a great mobile app, wich reminds me of the pre iOS 18 UI in iCloud Photos.
