@@ -4,21 +4,18 @@
   <meta charset="utf-8">
   <title>{{ .Title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css"></head>
+  <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="topbar">
-  <h2 class="logo"><a href="/">Philipp's Blog</a></h2>
-  <div class="nav-container">
-    <button class="menu-toggle" onclick="document.getElementById('top-nav').classList.toggle('show')">☰</button>
     <nav class="menu" id="top-nav">
+      <a href="/">Home</a>
       <a href="/posts">Posts</a>
-      <!--<a href="/about">About</a>-->
       <a href="/index.xml" target="_blank">RSS</a>
     </nav>
   </div>
-  </div>
+
   <div class="container">
     <main class="content">
       {{ block "main" . }}{{ end }}

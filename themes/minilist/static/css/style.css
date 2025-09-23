@@ -106,7 +106,7 @@ a:hover {
   align-items: center;
 }
 .menu a {
-  text-decoration: none;            /* nav links not underlined (like zacoons) */
+  text-decoration: underline;  
   text-transform: lowercase;
   letter-spacing: .3px;
   padding: .1rem .1rem;
@@ -115,35 +115,8 @@ a:hover {
 }
 .menu a:hover { color: var(--link-hover); }
 
-/* Mobile nav (kept minimal) */
-.menu-toggle {
-  background: none;
-  border: none;
-  font-size: 1.35rem;
-  display: none;
-  color: var(--link);
-  cursor: pointer;
-  line-height: 1;
-}
-
-@media (max-width: 700px) {
-  .menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 1rem;
-    background: var(--bg);
-    flex-direction: column;
-    padding: .5rem .75rem;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-  }
-  .menu.show { display: flex; }
-  .menu-toggle { display: block; }
-}
-
 /* Headings — light weight, roomy, inline “hash” vibe comes from content, not style */
-h1, h2, h3, h4 { margin: 1.2em 0 .5em; font-weight: 700; }
+h1, h2, h3, h4 { margin: 0.5em 0 .5em; font-weight: 700; }
 p { margin: .8em 0; }
 
 /* Asterism divider like the site’s “* * *” */
