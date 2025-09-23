@@ -2,13 +2,6 @@
   {{ .Content }}
 
   {{ if .IsHome }}
-    <section class="pgp">
-      {{ with .Site.Params.pgp.keyURL }}
-        <span class="pgp-link"><a href="{{ . | relURL }}" download>PGP</a></span>
-      {{ end }}
-      {{ with .Site.Params.pgp.fingerprint }}
-        <span class="pgp-fpr"><code>{{ . }}</code></span>
-      {{ end }}
-    </section>
+
   {{ end }}
 {{ end }}
