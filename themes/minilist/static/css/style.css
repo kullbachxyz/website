@@ -1,85 +1,131 @@
+/* === Zacoons-inspired minimal theme (muted) ===
+   - narrow readable column
+   - lowercase, understated nav
+   - underlined links
+   - subtle asterism divider
+   - keeps your dark mode + code styling
+*/
+
+/* Color system */
 :root {
-  --bg: #fff;
-  --fg: #111;
-  --link: #000;
-  --link-hover: #666;
-  --muted: #999;
+  --bg: #fafafa;
+  --fg: #151515;
+  --muted: #8a8a8a;
+
+  /* Links: mostly inherit, subtle emphasis */
+  --link: #222;
+  --link-hover: #555;
+
+  /* Lines / borders */
+  --line: #e6e6e6;
+
+  /* Max width */
+  --wrap: 720px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111;
-    --fg: #eee;
-    --link: #fff;
-    --link-hover: #bbb;
-    --muted: #aaa;
+    --bg: #0f0f0f;
+    --fg: #e8e8e8;
+    --muted: #a3a3a3;
+    --link: #f0f0f0;
+    --link-hover: #bdbdbd;
+    --line: #242424;
+    --wrap: 720px;
   }
 }
 
+/* Base */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
 body {
   margin: 0;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Fira Code", "Courier New", monospace;
   background: var(--bg);
   color: var(--fg);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
+/* Muted secondary text */
+.article-date,
+.content td.date,
 footer {
-  padding-top: 65px;
+  color: var(--muted);
 }
 
-.container a {
-  font-weight: bold;
+/* Page container */
+.content {
+  max-width: var(--wrap);
+  margin: 2.25rem auto;
+  padding: 0 1rem;
+}
+
+/* Footer breathing room */
+footer { padding-top: 3.5rem; }
+
+/* Links — understated, underlined */
+a {
   color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
-
-.container a:hover {
+a:hover {
   color: var(--link-hover);
+  text-underline-offset: 3px;
 }
 
+/* Limit link weight inside containers */
+.container a,
+.menu a,
+.logo a { font-weight: 600; }
+
+/* Top bar — ultra-simple, lowercase menu */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  max-width: 900px;
-  margin: auto;
-  position: relative;
-  margin-bottom: -2rem;
+  gap: .75rem;
+  padding: .85rem 1rem;
+  max-width: var(--wrap);
+  margin: 0 auto;
 }
 
-.logo a{
-  font-size: 1.5rem;
-  font-weight: bold;
+.logo a {
+  font-size: 1.4rem;   /* bump up */
+  font-weight: 800;    /* heavier weight */
   color: var(--link);
   text-decoration: none !important;
+  letter-spacing: .3px;
 }
 
+/* Nav */
+.menu {
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+}
+.menu a {
+  text-decoration: none;            /* nav links not underlined (like zacoons) */
+  text-transform: lowercase;
+  letter-spacing: .3px;
+  padding: .1rem .1rem;
+  border-radius: 4px;
+  color: var(--link);
+}
+.menu a:hover { color: var(--link-hover); }
+
+/* Mobile nav (kept minimal) */
 .menu-toggle {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   display: none;
   color: var(--link);
   cursor: pointer;
+  line-height: 1;
 }
 
-.menu {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.menu a {
-  text-decoration: none;
-  font-weight: bold;
-  color: var(--link);
-}
-
-.menu a:hover {
-  color: var(--link-hover);
-}
-
-/* Mobile styles */
 @media (max-width: 700px) {
   .menu {
     display: none;
@@ -88,92 +134,99 @@ footer {
     right: 1rem;
     background: var(--bg);
     flex-direction: column;
-    padding: 0.5rem 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: .5rem .75rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
   }
-
-  .menu.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
+  .menu.show { display: flex; }
+  .menu-toggle { display: block; }
 }
 
-.content {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
+/* Headings — light weight, roomy, inline “hash” vibe comes from content, not style */
+h1, h2, h3, h4 { margin: 1.2em 0 .5em; font-weight: 700; }
+p { margin: .8em 0; }
 
-.article-date {
+/* Asterism divider like the site’s “* * *” */
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 2rem 0;
+}
+.asterism {
+  display: block;
+  text-align: center;
   color: var(--muted);
-  font-size: 0.95rem;
+  letter-spacing: .5em;
+  margin: 2rem 0;
+}
+.asterism::before { content: "* * *"; }
+
+/* Date/text meta */
+.article-date,
+.content td.date {
+  color: var(--muted);
+  font-size: .95rem;
 }
 
+/* Lists closer to body copy */
+ul, ol { padding-left: 1.2rem; margin: .6rem 0 1rem; }
+
+/* Tables — bare, full width */
 .content table {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
+  border: none;
 }
-
 .content td {
-  padding: 0.1rem 0;
+  padding: .35rem 0;
   vertical-align: top;
+  border: none;
 }
 
-.content td:first-child {
-  width: 80%;
-  text-align: left;
-}
-
+.content td:first-child { width: 80%; text-align: left; }
 .content td.date {
   width: 20%;
   text-align: right;
   color: var(--muted);
-  font-size: 0.95rem;
   white-space: nowrap;
 }
 
-/* Syntax Highlighting */
-
-/* Code block container */
+/* Code blocks — minimalist frame */
 pre.chroma {
-  background-color: var(--bg);
+  background: var(--bg);
   color: var(--fg);
   padding: 1em;
   border-radius: 6px;
   overflow-x: auto;
-  font-family: 'Fira Code', 'Courier New', monospace;
-  font-size: 0.95em;
+  font-family: "Fira Code", ui-monospace, "Courier New", monospace;
+  font-size: .95em;
   line-height: 1.5;
-  border: 1px solid var(--muted);
-  margin-bottom: 1.5em;
+  border: 1px solid var(--line);
+  margin: 1.25em 0 1.75em;
 }
-
-/* Inline code */
 code {
-  background-color: var(--bg);
+  background: transparent;
   color: var(--fg);
-  padding: 0.2em 0.4em;
-  font-size: 0.9em;
+  padding: .1em .25em;
+  border: none;   /* no box lines */
+  font-size: .92em;
 }
 
-/* Chroma token styles — fully minimalist */
-.chroma .c  { color: var(--muted); }   /* Comment */
-.chroma .k  { color: var(--fg); }      /* Keyword */
-.chroma .s  { color: var(--fg); }      /* String */
-.chroma .o  { color: var(--fg); }      /* Operator */
-.chroma .n  { color: var(--fg); }      /* Name */
-.chroma .p  { color: var(--fg); }      /* Punctuation */
-.chroma .nf { color: var(--fg); }      /* Function name */
-.chroma .nb { color: var(--fg); }      /* Built-in name */
-.chroma .nv { color: var(--fg); }      /* Variable */
+/* Chroma tokens — keep muted */
+.chroma .c  { color: var(--muted); } /* Comment */
+.chroma .k,
+.chroma .s,
+.chroma .o,
+.chroma .n,
+.chroma .p,
+.chroma .nf,
+.chroma .nb,
+.chroma .nv { color: var(--fg); }
 
-/* Turn off any remaining styles */
-.chroma .ge,
-.chroma .gs {
+/* Remove emphasis overrides */
+.chroma .ge, .chroma .gs {
   font-style: normal;
   font-weight: normal;
   background: none;
