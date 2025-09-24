@@ -121,7 +121,7 @@ a:hover {
 .menu a:hover { color: var(--link-hover); }
 
 /* Headings — light weight, roomy, inline “hash” vibe comes from content, not style */
-h1, h2, h3, h4 { margin: 0.5em 0 .5em; font-weight: 700; }
+h1, h2, h3, h4 { margin: 0em 0 0em; font-weight: 700; }
 p { margin: .8em 0; }
 
 /* Asterism divider like the site’s “* * *” */
