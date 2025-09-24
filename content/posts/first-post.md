@@ -9,5 +9,5 @@ I’ve tried maintaning a personal website a few times in the past. I always bec
 
 So I set out to create the simplest possible site — putting the content first.
 
-This site is build with Hugo and a custom template I made. It has minimal CSS and only one line of JS for the mobile menu. The simplicity is intentional. I want this site to be a place where I can focus on the content.
+This site is build with Hugo and a custom template I made. It has minimal CSS and ~~only one line of JS for the mobile menu~~ no JS at all. The simplicity is intentional. I want this site to be a place where I can focus on the content.
 
