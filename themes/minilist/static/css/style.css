@@ -59,7 +59,7 @@ html { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Fira Code", "Courier New", monospace;
+  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
   background: var(--bg);
   color: var(--fg);
   line-height: 1.65;
@@ -186,7 +186,7 @@ pre.chroma {
   padding: 1em;
   border-radius: 6px;
   overflow-x: auto;
-  font-family: "Fira Code", ui-monospace, "Courier New", monospace;
+  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
   font-size: .95em;
   line-height: 1.5;
   border: 2px solid var(--line);
