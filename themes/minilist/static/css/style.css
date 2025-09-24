@@ -49,7 +49,6 @@ body {
 
 /* Muted secondary text */
 .article-date,
-.content td.date,
 footer {
   color: var(--muted);
 }
@@ -150,26 +149,28 @@ hr {
 /* Lists closer to body copy */
 ul, ol { padding-left: 1.2rem; margin: .6rem 0 1rem; }
 
-/* Tables — bare, full width */
-.content table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  border: none;
-}
-.content td {
-  padding: .35rem 0;
-  vertical-align: top;
-  border: none;
+/* Post Section */
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.content td:first-child { width: 80%; text-align: left; }
-.content td.date {
-  width: 20%;
-  text-align: right;
+.posts li {
+  padding: .35rem 0;
+}
+
+.posts a {
+  text-decoration: underline;
+  margin-right: .5rem; /* small gap before the date */
+}
+
+.posts .date {
+  font-size: 0.85rem;
   color: var(--muted);
   white-space: nowrap;
 }
+
 
 /* Code blocks — minimalist frame */
 pre.chroma {

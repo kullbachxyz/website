@@ -1,11 +1,11 @@
 {{ define "main" }}
 <h1>Posts</h1>
-<table>
+<ul class="posts">
   {{ range .Pages.ByDate.Reverse }}
-  <tr>
-    <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
-    <td class="date">{{ .Date.Format "2006-01-02" }}</td>
-  </tr>
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+  </li>
   {{ end }}
-</table>
+</ul>
 {{ end }}
