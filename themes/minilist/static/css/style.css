@@ -1,14 +1,11 @@
 /* Color system */
 :root {
   color-scheme: light;
-  --bg:   #f9f5d7;
-  --fg0:  #282828;
-  --fg:   #3c3836;
-  --blue: #076678;
-  --aqua: #689d6a;
+  --bg:   #fcfdfe;
+  --fg:   #515253;
+  --blue: #3182bd;
   --yelw: #b57614;
-  --purp: #d3869b;
-  --muted: #7c6f64;
+  --muted: #737475;
   --link: var(--blue);
   --link-hover: var(--blue);
   --line: #e6e6e6;
@@ -18,17 +15,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --bg:   #1c1c1c;
-    --fg0:  #fbf1c7;
-    --fg:   #ebdbb2;
-    --blue: #83a598;
-    --aqua: #8ec07c;
-    --yelw: #fabd2f;
-    --purp: #d3869b;
-    --muted: #928374;
+    --bg:   #0c0d0e;
+    --fg:   #b7b8b9;
+    --blue: #3182bd;
+    --yelw: #c3c322;
+    --muted: #737475;
     --link: var(--blue);
     --link-hover: var(--blue);
-    --line: #242424;
+    --line: #343434;
     --wrap: 720px;
   }
 }
@@ -169,20 +163,17 @@ ul, ol { padding-left: 1.2rem; margin: .6rem 0 1rem; }
 
 .posts li {
   align-items: center;
-  display: flex;
   gap: 1rem;
   padding: .35rem 0;
 }
 
 .posts .date {
-  flex-shrink: 0;
   font-size: 0.85rem;
   color: var(--muted);
   white-space: nowrap;
 }
 
 .posts a {
-  flex: 1;
   text-decoration: underline;
   margin: auto 0;
 }
@@ -198,7 +189,7 @@ pre.chroma {
   font-family: "Fira Code", ui-monospace, "Courier New", monospace;
   font-size: .95em;
   line-height: 1.5;
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   margin: 1.25em 0 1.75em;
 }
 code {
