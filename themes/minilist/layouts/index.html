@@ -3,5 +3,26 @@
 
   {{ if .IsHome }}
 
+  {{ $posts := first 3 ((where .Site.RegularPages "Section" "posts").ByDate.Reverse) }}
+
+  {{ if gt (len $posts) 0 }}
+    <section class="latest-posts">
+      <h2>Latest posts</h2>
+      <ul class="post-list">
+        {{ range $posts }}
+          <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+      <a href="/posts">↪ More</a>
+      <p></p>
+    </section>
+  {{ else }}
+    <p>No posts yet.</p>
+  {{ end }}
+
+    {{ partial "contact.html" . }}
+
   {{ end }}
 {{ end }}

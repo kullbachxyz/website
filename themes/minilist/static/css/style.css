@@ -9,7 +9,7 @@
   --yelw: #b57614;
   --purp: #d3869b;
   --muted: #7c6f64;
-  --link: var(--fg0);
+  --link: var(--blue);
   --link-hover: var(--blue);
   --line: #e6e6e6;
   --wrap: 720px;
@@ -26,7 +26,7 @@
     --yelw: #fabd2f;
     --purp: #d3869b;
     --muted: #928374;
-    --link: var(--fg0);
+    --link: var(--blue);
     --link-hover: var(--blue);
     --line: #242424;
     --wrap: 720px;
@@ -98,9 +98,11 @@ a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
 a:hover {
-  color: var(--link-hover);
-  text-underline-offset: 3px;
+  background-color: var(--blue);
+  color: var(--bg);
+  text-decoration: none!important;
 }
 
 /* Limit link weight inside containers */
@@ -121,20 +123,12 @@ a:hover {
 
 /* Nav */
 .menu {
-  display: flex;
   gap: .9rem;
-  align-items: center;
 }
 .menu a {
-  font-size: 1.08rem;
-  text-decoration: underline;  
+  font-size: 1.1rem;
   text-transform: lowercase;
-  letter-spacing: .3px;
-  padding: .1rem .1rem;
-  border-radius: 4px;
-  color: var(--link);
 }
-.menu a:hover { color: var(--link-hover); }
 
 /* Headings — light weight, roomy, inline “hash” vibe comes from content, not style */
 h1, h2, h3, h4 { margin: 0em 0 0em; font-weight: 700; }
