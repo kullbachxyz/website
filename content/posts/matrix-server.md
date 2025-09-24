@@ -4,3 +4,9 @@ draft = true
 title = 'Ghost the Glowies: Run Your Own Matrix Server'
 +++
 
+Synapse
+PostgreSQL
+Nginx
+Coturn
+Element Web
+synadm
