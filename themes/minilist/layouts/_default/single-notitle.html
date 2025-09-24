@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article>
+  {{ if eq .Section "posts" }}
+    <p class="article-date"><em>{{ .Date.Format "Jan 2, 2006" }}</em></p>
+  {{ end }}
+  {{ .Content }}
+</article>
+{{ end }}

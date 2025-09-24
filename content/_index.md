@@ -2,7 +2,7 @@
 title: "Philipp's Blog"
 ---
 
-*Welcome, web-surfer!*
+### *Welcome, web-surfer!*
 
 I'm a technologist by trade with a passion for learning. I'm especially interested in IT security, Linux, and open-source technologies. I'm also exploring how to be more mindful of my technology usage.
 

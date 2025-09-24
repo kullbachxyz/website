@@ -57,12 +57,17 @@ footer {
 /* Page container */
 .content {
   max-width: var(--wrap);
-  margin: 2.25rem auto;
+  margin: 0.25rem auto;
   padding: 0 1rem;
 }
 
 /* Footer breathing room */
-footer { padding-top: 3.5rem; }
+footer { 
+  margin-top: 3.5rem; 
+  font-size: 0.85em;
+  text-align: center;
+  border-top: 1px solid var(--muted);
+}
 
 /* Links — understated, underlined */
 a {
