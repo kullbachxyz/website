@@ -3,8 +3,8 @@
 <ul class="posts">
   {{ range .Pages.ByDate.Reverse }}
   <li>
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </li>
   {{ end }}
 </ul>
