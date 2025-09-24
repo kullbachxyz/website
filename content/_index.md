@@ -2,10 +2,12 @@
 title: "Philipp's Blog"
 ---
 
-## *Welcome, web-surfer!*
+## _Welcome to my corner of the web :-)_
 
-This is my website, where I like to share my toughts, insights and guides on how to be more independent from big tech.
-Feel free to check out my [posts](/posts) and reach out to chat about it if you like.
+This is my website, where I like to share my toughts, insights and guides on how to be more independent from big tech. If something resonates with you, I’d love to hear your perspective — feel free to reach out.
+
+<!--This is my website, where I like to share my toughts, insights and guides on how to be more independent from big tech.
+Feel free to check out my [posts](/posts) and reach out to chat about it if you like.-->
 
 <!--I'm Philipp a technologist by trade with a passion for learning. I'm especially interested in IT security, Linux, and open-source technologies. I'm also exploring how to be more mindful of my technology usage.
 
