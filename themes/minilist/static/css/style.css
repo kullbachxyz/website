@@ -1,17 +1,48 @@
 /* Color system */
 :root {
+  color-scheme: light;
+  --bg:   #f9f5d7;
+  --fg0:  #282828;
+  --fg:   #3c3836;
+  --blue: #076678;
+  --aqua: #689d6a;
+  --yelw: #b57614;
+  --purp: #d3869b;
+  --muted: #7c6f64;
+  --link: var(--fg0);
+  --link-hover: var(--blue);
+  --line: #e6e6e6;
+  --wrap: 720px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg:   #1c1c1c;
+    --fg0:  #fbf1c7;
+    --fg:   #ebdbb2;
+    --blue: #83a598;
+    --aqua: #8ec07c;
+    --yelw: #fabd2f;
+    --purp: #d3869b;
+    --muted: #928374;
+    --link: var(--fg0);
+    --link-hover: var(--blue);
+    --line: #242424;
+    --wrap: 720px;
+  }
+}
+
+/* OLD THEME — commented out for quick re-enable */
+
+/*
+:root {
   --bg: #fafafa;
   --fg: #151515;
   --muted: #8a8a8a;
-
-  /* Links: mostly inherit, subtle emphasis */
   --link: #222;
   --link-hover: #555;
-
-  /* Lines / borders */
   --line: #e6e6e6;
-
-  /* Max width */
   --wrap: 720px;
 }
 
@@ -26,6 +57,7 @@
     --wrap: 720px;
   }
 }
+*/
 
 /* Base */
 html { box-sizing: border-box; }
