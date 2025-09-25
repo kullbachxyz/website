@@ -5,6 +5,7 @@
   --fg:   #515253;
   --blue: #3182bd;
   --yelw: #b57614;
+  --green: #31a354;
   --muted: #737475;
   --link: var(--blue);
   --link-hover: var(--blue);
@@ -16,9 +17,10 @@
   :root {
     color-scheme: dark;
     --bg:   #0c0d0e;
-    --fg:   #b7b8b9;
+    --fg:   #e7e8e9;
     --blue: #3182bd;
     --yelw: #c3c322;
+    --green: #31a354;
     --muted: #737475;
     --link: var(--blue);
     --link-hover: var(--blue);
@@ -27,7 +29,7 @@
   }
 }
 
-/* OLD THEME — commented out for quick re-enable */
+/* MONOCHROME THEME */
 
 /*
 :root {
@@ -94,7 +96,7 @@ a {
 }
 
 a:hover {
-  background-color: var(--blue);
+  background-color: var(--link-hover);
   color: var(--bg);
   text-decoration: none!important;
 }

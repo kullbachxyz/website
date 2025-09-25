@@ -36,5 +36,4 @@ I use the build in 2FA function in KeePass.
 ## Mobile Apps
 [Orbot](https://support.torproject.org/glossary/orbot/) is a system-wide proxy that encrypts all your traffic and hides it from your ISP. It uses the TOR Network. [Molly](https://molly.im/) (Android-only) is a fork of Signal that encrypts your message data at rest, prompting you to enter a passphrase when you unlock the app. It also securly shreds memory content after closing. [KeepassXC](https://keepassxc.org/) is a great KeePass client for Android. Use [KeePassium](https://keepassium.com/pricing/) if you are on iOS. [Organic Maps](https://organicmaps.app/) is a very good offline maps app for Anroid and iOS. [FitoTrack](https://codeberg.org/jannis/FitoTrack) is a app for tracking your workouts. I recommend to use it with a bluetooth heart rate sensor like the [Polar H10](https://www.polar.com/en/sensors/h10-heart-rate-sensor).
 
-If you are on Android **don't use the Play Store**, use [F-Droid](https://f-droid.org/) or [Obtainium](https://obtainium.imranr.dev/) to download your apps. If you have a Google Pixel, install GrapheneOS, if not, consider getting one. If you are in iOS, switch to Android ;-)
-
+If you are on Android **don't use the Play Store**, use [F-Droid](https://f-droid.org/) or [Obtainium](https://obtainium.imranr.dev/) to download your apps.
