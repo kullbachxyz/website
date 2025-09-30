@@ -1,221 +1,133 @@
 /* Color system */
-:root {
+:root{
   color-scheme: light;
-  --bg:   #fcfdfe;
-  --fg:   #515253;
-  --blue: #3182bd;
-  --yelw: #b57614;
-  --green: #31a354;
-  --muted: #737475;
-  --link: var(--blue);
-  --link-hover: var(--blue);
-  --line: #e6e6e6;
-  --wrap: 720px;
+  --bg:#ffffff;
+  --fg:#111111;
+  --muted:#6b6b6b;
+  --link:#0645ad;
+  --link-hover:#ffffff;
+  --line:#e5e5e5;
+  --wrap:760px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+@media (prefers-color-scheme: dark){
+  :root{
     color-scheme: dark;
-    --bg:   #0c0d0e;
-    --fg:   #e7e8e9;
-    --blue: #3182bd;
-    --yelw: #c3c322;
-    --green: #31a354;
-    --muted: #737475;
-    --link: var(--blue);
-    --link-hover: var(--blue);
-    --line: #343434;
-    --wrap: 720px;
+    --bg:#0c0d0e;
+    --fg:#e7e8e9;
+    --muted:#9a9a9a;
+    --link:#8ab4f8;
+    --link-hover:#0c0d0e;
+    --line:#2a2a2a;
+    --wrap:760px;
   }
 }
-
-/* MONOCHROME THEME */
-
-/*
-:root {
-  --bg: #fafafa;
-  --fg: #151515;
-  --muted: #8a8a8a;
-  --link: #222;
-  --link-hover: #555;
-  --line: #e6e6e6;
-  --wrap: 720px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f0f0f;
-    --fg: #e8e8e8;
-    --muted: #a3a3a3;
-    --link: #f0f0f0;
-    --link-hover: #bdbdbd;
-    --line: #242424;
-    --wrap: 720px;
-  }
-}
-*/
 
 /* Base */
-html { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; }
+html{box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
 
-body {
-  margin: 0;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.65;
   font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
-  background: var(--bg);
-  color: var(--fg);
-  line-height: 1.65;
-}
-
-/* Muted secondary text */
-.article-date,
-footer {
-  color: var(--muted);
+  font-size:16px;
 }
 
 /* Page container */
-.content {
-  max-width: var(--wrap);
-  margin: 0.25rem auto;
-  padding: 0 1rem;
+.content{
+  max-width:var(--wrap);
+  margin:.75rem auto 2.5rem;
+  padding:0 1rem;
 }
 
-/* Footer breathing room */
-footer { 
-  margin-top: 3.5rem; 
-  font-size: 0.85em;
-  text-align: center;
-  border-top: 1px solid var(--muted);
+/* Top bar — lowercase, inline */
+.topbar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:.75rem 1rem;
+  max-width:var(--wrap);
+  margin:0 auto;
+}
+.menu{display:flex;gap:1.25rem}
+.menu a{
+  font-size:1.2rem;
+  text-transform:lowercase;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  font-weight:600;
 }
 
-/* Links — understated, underlined */
-a {
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+/* Links — understated */
+a{
+  color:var(--link);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+a:hover{
+  background:var(--link);
+  color:var(--link-hover);
+  text-decoration:none!important;
 }
 
-a:hover {
-  background-color: var(--link-hover);
-  color: var(--bg);
-  text-decoration: none!important;
+/* Headings — “hash” vibe like Markdown */
+h1,h2,h3,h4{margin:1.1rem 0 .4rem;font-weight:700}
+h1::before{content:"# ";color:var(--muted)}
+h2::before{content:"## ";color:var(--muted)}
+h3::before{content:"### ";color:var(--muted)}
+/* keep hashes on their own line on small screens */
+@media (max-width:420px){
+  h1::before,h2::before,h3::before{display:inline}
 }
 
-/* Limit link weight inside containers */
-.container a,
-.menu a,
-.logo a { font-weight: 600; }
+p{margin:.8em 0}
 
-/* Top bar — ultra-simple, lowercase menu */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: .75rem;
-  padding: .85rem 1rem;
-  max-width: var(--wrap);
-  margin: 0 auto;
+/* Asterism divider */
+hr{border:0;height:1px;background:var(--line);margin:2rem 0}
+.asterism{
+  display:block;text-align:center;color:var(--muted);
+  letter-spacing:.5em;margin:2rem 0
 }
+.asterism::before{content:"- * - * - * -";}
 
-/* Nav */
-.menu {
-  gap: 1.5rem;
+/* Muted secondary */
+.muted,.article-date,footer{color:var(--muted)}
+
+/* Lists close to body copy */
+ul,ol{padding-left:1.2rem;margin:.6rem 0 1rem}
+
+/* Posts list — flat, date first */
+.posts{list-style:none;margin:0;padding:0;}
+.posts li{
+  display:flex;gap:.75rem;align-items:baseline;
+  padding:.45rem 0;
 }
-.menu a {
-  font-size: 1.1rem;
-  text-transform: lowercase;
+.posts .date{
+  font-size:.95rem;color:var(--muted);white-space:nowrap;min-width:7.2ch
 }
+.posts a{margin:auto 0}
 
-/* Headings — light weight, roomy, inline “hash” vibe comes from content, not style */
-h1, h2, h3, h4 { margin: 0em 0 0em; font-weight: 700; }
-p { margin: .8em 0; }
-
-/* Asterism divider like the site’s “* * *” */
-hr {
-  border: 0;
-  height: 1px;
-  background: var(--line);
-  margin: 2rem 0;
+/* Code blocks — minimal frame */
+pre.chroma{
+  background:var(--bg);color:var(--fg);
+  padding:1em;border-radius:6px;overflow-x:auto;
+  font-family:inherit;font-size:.95em;line-height:1.5;
+  border:1px solid var(--line);
+  margin:1.25em 0 1.75em;
 }
-.asterism {
-  display: block;
-  text-align: center;
-  color: var(--muted);
-  letter-spacing: .5em;
-  margin: 2rem 0;
-}
-.asterism::before { content: "* * *"; }
+code{background:transparent;color:var(--fg);padding:.1em .25em;border:none;font-size:.92em}
 
-/* Date/text meta */
-.article-date,
-.content td.date {
-  color: var(--muted);
-  font-size: .95rem;
-}
+/* Chroma tokens muted */
+.chroma .c{color:var(--muted)}
+.chroma .k,.chroma .s,.chroma .o,.chroma .n,.chroma .p,.chroma .nf,.chroma .nb,.chroma .nv{color:var(--fg)}
+.chroma .ge,.chroma .gs{font-style:normal;font-weight:normal;background:none}
 
-/* Lists closer to body copy */
-ul, ol { padding-left: 1.2rem; margin: .6rem 0 1rem; }
-
-/* Post Section*/
-.posts {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.posts li {
-  align-items: center;
-  gap: 1rem;
-  padding: .2rem 0;
-}
-
-.posts .date {
-  font-size: 0.85rem;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.posts a {
-  text-decoration: underline;
-  margin: auto 0;
-}
-
-
-/* Code blocks — minimalist frame */
-pre.chroma {
-  background: var(--bg);
-  color: var(--fg);
-  padding: 1em;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
-  font-size: .95em;
-  line-height: 1.5;
-  border: 2px solid var(--line);
-  margin: 1.25em 0 1.75em;
-}
-code {
-  background: transparent;
-  color: var(--fg);
-  padding: .1em .25em;
-  border: none;   /* no box lines */
-  font-size: .92em;
-}
-
-/* Chroma tokens — keep muted */
-.chroma .c  { color: var(--muted); } /* Comment */
-.chroma .k,
-.chroma .s,
-.chroma .o,
-.chroma .n,
-.chroma .p,
-.chroma .nf,
-.chroma .nb,
-.chroma .nv { color: var(--fg); }
-
-/* Remove emphasis overrides */
-.chroma .ge, .chroma .gs {
-  font-style: normal;
-  font-weight: normal;
-  background: none;
+/* Footer */
+footer{
+  margin-top:2.5rem;
+  font-size:.9em;
+  text-align:center;
 }

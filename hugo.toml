@@ -1,6 +1,6 @@
-baseURL = "https://philipp.kullbach.net/"
+baseURL = "https://blog.kullbach.net/"
 languageCode = "en-us"
-title = "Philipp's Blog"
+title = "kullbach.net"
 theme = "minilist"
 
 [markup]
