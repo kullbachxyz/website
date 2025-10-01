@@ -24,8 +24,12 @@
 }
 
 /* Base */
-html{box-sizing:border-box}
-*,*::before,*::after{box-sizing:inherit}
+html{
+  box-sizing:border-box
+}
+*,*::before,*::after{
+  box-sizing:inherit
+}
 
 body{
   margin:0;
@@ -52,7 +56,12 @@ body{
   max-width:var(--wrap);
   margin:0 auto;
 }
-.menu{display:flex;gap:1.25rem}
+
+.menu{
+  display:flex;
+  gap:1.25rem
+}
+
 .menu a{
   font-size:1.2rem;
   text-transform:lowercase;
@@ -85,49 +94,48 @@ h3::before{content:"### ";color:var(--muted)}
 
 p{margin:.8em 0}
 
-/* Asterism divider */
-hr{border:0;height:1px;background:var(--line);margin:2rem 0}
-.asterism{
-  display:block;text-align:center;color:var(--muted);
-  letter-spacing:.5em;margin:2rem 0
-}
-.asterism::before{content:"- * - * - * -";}
-
 /* Muted secondary */
-.muted,.article-date,footer{color:var(--muted)}
+.muted,.article-date{color:var(--muted)}
 
 /* Lists close to body copy */
 ul,ol{padding-left:1.2rem;margin:.6rem 0 1rem}
 
 /* Posts list — flat, date first */
-.posts{list-style:none;margin:0;padding:0;}
+.posts{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
 .posts li{
-  display:flex;gap:.75rem;align-items:baseline;
+  display:flex;
+  gap:.75rem;
+  align-items:baseline;
   padding:.45rem 0;
 }
+
 .posts .date{
-  font-size:.95rem;color:var(--muted);white-space:nowrap;min-width:7.2ch
+  font-size:.95rem;
+  color:var(--muted);
+  white-space:nowrap;
+  min-width:10ch
 }
-.posts a{margin:auto 0}
+
+.posts a{
+  margin:auto 0
+}
 
 /* Code blocks — minimal frame */
 pre.chroma{
-  background:var(--bg);color:var(--fg);
+  background:var(--bg);
   padding:1em;border-radius:6px;overflow-x:auto;
   font-family:inherit;font-size:.95em;line-height:1.5;
   border:1px solid var(--line);
   margin:1.25em 0 1.75em;
 }
-code{background:transparent;color:var(--fg);padding:.1em .25em;border:none;font-size:.92em}
+code{background:transparent;color:var(--fg);padding:.1em .25em;border:none;font-size:.85em}
 
 /* Chroma tokens muted */
 .chroma .c{color:var(--muted)}
 .chroma .k,.chroma .s,.chroma .o,.chroma .n,.chroma .p,.chroma .nf,.chroma .nb,.chroma .nv{color:var(--fg)}
 .chroma .ge,.chroma .gs{font-style:normal;font-weight:normal;background:none}
-
-/* Footer */
-footer{
-  margin-top:2.5rem;
-  font-size:.9em;
-  text-align:center;
-}
