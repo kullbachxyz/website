@@ -23,7 +23,13 @@ docker run -it --rm \
 ```
 This downloads all my pictures and videos to `~/icloud-download`.
 
-### Dealig with Live Photos
+If you dont like to spin up a docker container, you can also use the `icloudpd` excutable. You can download it [here](github.com/icloud-photos-downloader/icloud_photos_downloader/releases/). Use the following syntax:
+```bash
+icloudpd --directory ~/icloud-download --username user@domain.com --watch-with-interval 3600
+```
+If you get en error like `ERROR Error processing user user@domain.de, continuing with next user...` it suggest a generic problem with the account. In most cases you just need to login to the web interface and accept the terms of use.
+
+### Dealing with Live Photos
 One small annoyance I had was Live Photos. It's a feature on iPhone, that takes a small video with the picture you have taken. I personally don't want those videos to be embedded into the pictures (alltough Immich supports that). Conveniently `icloudpd` splits Live Photos into a JPEG and a MOV file. I used this quick command to remove all the MOV files from the Live Photos:
 ```bash
 find ~/icloud-download/* -type f -iname '*_HEVC.MOV' -delete
@@ -35,10 +41,15 @@ You need to create a API key for your Immich account to upload with `immich-go`.
 I used the following command to upload:
 ```bash
 ./immich-go upload from-folder \
-  --server=https://photos.domain.com \
+  --server=https://immich.domain.com \
   --api-key=1234567890 \
   ~/icloud-download \
-  --pause-immich-jobs=TRUE
+  --pause-immich-jobs=FALSE \
+  --log-level=DEBUG --api-trace --log-file=immich-go.log
 ```
+
+Make sure to set a big enough quota for the user or dont set a quota at all, if you exceed the quot, `immich-go` will just exit with `ERR AssetUpload, POST, https://immich.domain.com/api/assets`.
+
+Use the flags `--log-level=DEBUG --api-trace --log-file=immich-go.log` to write a persistant log and get verbose log output to troublehoot if someting doesnt work.
 
 And that's it. Immich also has a great mobile app, wich reminds me of the pre iOS 18 UI in iCloud Photos.
