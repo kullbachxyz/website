@@ -3,6 +3,9 @@ languageCode = "en-us"
 title = "kullbach.net"
 theme = "minilist"
 
+[pagination]
+  pagerSize = 5
+
 [markup]
   [markup.highlight]
     noClasses = false

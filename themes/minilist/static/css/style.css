@@ -1,141 +1,251 @@
-/* Color system */
+/* Palette + rhythm */
 :root{
   color-scheme: light;
-  --bg:#ffffff;
-  --fg:#111111;
-  --muted:#6b6b6b;
-  --link:#0645ad;
-  --link-hover:#ffffff;
-  --line:#e5e5e5;
-  --wrap:760px;
+  --bg:#1b1b1b;
+  --fg:#f1eee7;
+  --muted:#9f968b;
+  --accent:#d67252;
+  --line:#2c2c2c;
+  --wrap:860px;
+  --font:"IBM Plex Mono","Menlo","Consolas","Liberation Mono",monospace;
 }
 
 @media (prefers-color-scheme: dark){
   :root{
     color-scheme: dark;
-    --bg:#0c0d0e;
-    --fg:#e7e8e9;
-    --muted:#9a9a9a;
-    --link:#8ab4f8;
-    --link-hover:#0c0d0e;
-    --line:#2a2a2a;
-    --wrap:760px;
+    --bg:#0f0f0f;
+    --fg:#e6e1d9;
+    --muted:#a39c94;
+    --accent:#e9755c;
+    --line:#242424;
   }
 }
 
-/* Base */
-html{
-  box-sizing:border-box
-}
-*,*::before,*::after{
-  box-sizing:inherit
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
   background:var(--bg);
   color:var(--fg);
-  line-height:1.65;
-  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
-  font-size:16px;
+  line-height:1.7;
+  font-family:var(--font);
+  font-size:17px;
+  text-rendering:optimizeLegibility;
 }
 
-/* Page container */
-.content{
+.page{
   max-width:var(--wrap);
-  margin:.75rem auto 2.5rem;
-  padding:0 1rem;
+  margin:0;
+  padding:2.25rem 2.5rem 3rem;
 }
 
-/* Top bar — lowercase, inline */
-.topbar{
+.header{
   display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:.75rem 1rem;
-  max-width:var(--wrap);
-  margin:0 auto;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.8rem;
+  padding-bottom:.65rem;
+  margin-bottom:1.4rem;
+  max-width:740px;
+  width:100%;
 }
 
 .menu{
-  display:flex;
-  gap:1.25rem
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
+  gap:.6rem;
+  width:100%;
 }
 
 .menu a{
-  font-size:1.2rem;
-  text-transform:lowercase;
+  color:var(--accent);
+  font-weight:700;
   text-decoration:underline;
   text-underline-offset:2px;
-  font-weight:600;
+  border-bottom:none;
+  padding:.2rem 0;
+  letter-spacing:.015em;
+  text-align:left;
+  font-size:1.05rem;
+  line-height:1.1;
 }
 
-/* Links — understated */
+.menu a:hover,
+.menu a:focus-visible{
+  color:var(--fg);
+  background:transparent;
+}
+
+.header hr{
+  width:100%;
+  border:0;
+  height:1px;
+  background:#2a2a2a;
+  color:#2a2a2a;
+  margin:1rem 0 1.2rem;
+}
+
+.content{
+  max-width:740px;
+}
+
+/* Body text */
+p{margin:.9em 0}
 a{
-  color:var(--link);
-  text-decoration:underline;
-  text-underline-offset:2px;
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
 }
-a:hover{
-  background:var(--link);
-  color:var(--link-hover);
-  text-decoration:none!important;
-}
-
-/* Headings — “hash” vibe like Markdown */
-h1,h2,h3,h4{margin:1.1rem 0 .4rem;font-weight:700}
-h1::before{content:"# ";color:var(--muted)}
-h2::before{content:"## ";color:var(--muted)}
-h3::before{content:"### ";color:var(--muted)}
-/* keep hashes on their own line on small screens */
-@media (max-width:420px){
-  h1::before,h2::before,h3::before{display:inline}
+a:hover,
+a:focus-visible{
+  color:var(--fg);
+  border-bottom-color:var(--fg);
 }
 
-p{margin:.8em 0}
+h1,h2,h3,h4{
+  margin:1.35rem 0 .5rem;
+  font-weight:700;
+  letter-spacing:.015em;
+}
 
-/* Muted secondary */
-.muted,.article-date{color:var(--muted)}
+h1{font-size:1.9rem;}
+h2{font-size:1.7rem;}
+h3{font-size:1.15rem;}
 
-/* Lists close to body copy */
-ul,ol{padding-left:1.2rem;margin:.6rem 0 1rem}
+.muted{
+  color:var(--muted);
+}
 
-/* Posts list — flat, date first */
-.posts{
+ul,ol{
+  padding-left:1.2rem;
+  margin:.7rem 0 1.1rem;
+}
+
+ol{
+  list-style-position:inside;
+  padding-left:0;
+}
+
+blockquote{
+  margin:1.1rem 0;
+  padding:.5rem 1rem;
+  border-left:3px solid var(--accent);
+  background:rgba(0,0,0,.02);
+}
+
+.post-list{
   list-style:none;
-  margin:0;
   padding:0;
-}
-
-.posts li{
+  margin:1rem 0 0;
   display:flex;
-  gap:.75rem;
-  align-items:baseline;
-  padding:.45rem 0;
+  flex-direction:column;
+  gap:.3rem;
 }
 
-.posts .date{
-  font-size:.95rem;
+.post-list li{
+  padding:.25rem 0;
+}
+
+.post-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+}
+
+.post-date{
   color:var(--muted);
   white-space:nowrap;
-  min-width:10ch
+  font-size:.95rem;
 }
 
-.posts a{
-  margin:auto 0
+.post-list .summary{
+  margin:.2rem 0 0;
+  color:var(--muted);
+  font-size:.95rem;
+  line-height:1.5;
 }
 
-/* Code blocks — minimal frame */
-pre.chroma{
+.pager{
+  margin-top:1rem;
+}
+
+.pager .next{
+  display:inline;
+  padding:0;
+  background:transparent;
+  color:var(--accent);
+  border:none;
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+
+.pager .next:hover,
+.pager .next:focus-visible{
+  color:var(--fg);
+  border-bottom-color:var(--fg);
+}
+
+/* Articles */
+article{
   background:var(--bg);
-  padding:1em;border-radius:6px;overflow-x:auto;
-  font-family:inherit;font-size:.95em;line-height:1.5;
-  border:1px solid var(--line);
-  margin:1.25em 0 1.75em;
+  color:var(--fg);
+  padding:0;
+  border:none;
+  border-radius:10px;
+  box-shadow:none;
 }
-code{background:transparent;color:var(--fg);padding:.1em .25em;border:none;font-size:.85em}
 
-/* Chroma tokens muted */
-.chroma .c{color:var(--muted)}
-.chroma .k,.chroma .s,.chroma .o,.chroma .n,.chroma .p,.chroma .nf,.chroma .nb,.chroma .nv{color:var(--fg)}
+article h2:first-child,
+article h1:first-child{
+  margin-top:0;
+}
+
+/* Code */
+pre.chroma{
+  margin:1.2rem 0 1.6rem;
+  padding:1rem 1rem;
+  background:#000;
+  border:1px solid #2f2f2f;
+  border-radius:8px;
+  overflow-x:auto;
+}
+
+code{
+  background:#111;
+  color:#f5f2ec;
+  padding:.15em .4em;
+  border-radius:4px;
+  font-size:.9em;
+  border:1px solid #2f2f2f;
+}
+
+pre code{
+  background:transparent;
+  color:inherit;
+  padding:0;
+  border:none;
+  font-size:inherit;
+  border-radius:0;
+}
+
+.chroma .c{color:#8c847b}
+.chroma .k,.chroma .s,.chroma .o,.chroma .n,.chroma .p,.chroma .nf,.chroma .nb,.chroma .nv{color:inherit}
 .chroma .ge,.chroma .gs{font-style:normal;font-weight:normal;background:none}
+
+@media(max-width:640px){
+  body{font-size:16px;}
+  .page{
+    padding:1.5rem 1rem 2rem;
+  }
+  .menu{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:.6rem;
+  }
+  .content{max-width:100%;}
+  article{padding:1rem;}
+}
