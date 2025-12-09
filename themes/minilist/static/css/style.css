@@ -277,5 +277,5 @@ pre code{
     gap:.6rem;
   }
   .content{max-width:100%;}
-  article{padding:1rem;}
+  article{padding:0;}
 }

@@ -1,4 +1,4 @@
-baseURL = "https://blog.kullbach.net/"
+baseURL = "https://kullbach.net/"
 languageCode = "en-us"
 title = "kullbach.net"
 theme = "minilist"
