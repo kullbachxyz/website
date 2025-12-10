@@ -8,7 +8,7 @@ layout: "single-notitle"
 ## Why should you use terminal apps?
 > *Because you look really cool when using them*
 
-In all seriousness though - using terminal apps makes you using a computer more efficiently.
+In all seriousness though - **terminal apps make using a computer more efficient.** 
 Here are my top reasons to use terminal apps:
 - **Speed** - no heavy GUI-framework
 - **Efficiently** - <code>search a directory for files with a certain ending, but exclude some file and count the lines in the selected files</code> would be very cumbersome in a GUI application, but can be doe easily in the command line. 
