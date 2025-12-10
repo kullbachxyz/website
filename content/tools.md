@@ -9,7 +9,7 @@ layout: "single-notitle"
 ~~[Mozilla Firefox](https://www.firefox.com/de/) with [arkenfox.js](https://github.com/arkenfox/user.js) applied.~~ Switched to [LibreWolf](https://librewolf.net/) with my own [hardening script](https://github.com/kullbachxyz/librewolf-hardening) applied to it. If you need to use Chrome, use [ungoogled-chromium](https://ungoogled-software.github.io/ungoogled-chromium-binaries/). Take a look at the recommended [Browser Extensions](#browser-extensions) also!
 
 ## Search Engines
-**_Don't use Google!_** ~~My standard recommendation would be [DuckDuckGo](https://duckduckgo.com/?t=ffa)~~. I have been using a self-hosted instance of [SearNGX](https://github.com/searxng/searxng) for some time now and I am quite happy with it. [Brave Search](https://search.brave.com/) and [Mojeek](https://www.mojeek.com/) maintain thier own indexes, seperate from Google and Bing. You can find a list of public SearNXG instances [here](https://searx.space/).
+**_Don't use Google!_** ~~My standard recommendation would be [DuckDuckGo](https://duckduckgo.com/?t=ffa)~~. I have been using a self-hosted instance of [SearNXG](https://github.com/searxng/searxng) for some time now and I am quite happy with it. [Brave Search](https://search.brave.com/) and [Mojeek](https://www.mojeek.com/) maintain thier own indexes, seperate from Google and Bing. You can find a list of public SearNXG instances [here](https://searx.space/).
 
 ## Password Managers
 [KeepassXC](https://keepassxc.org/) on my laptop [KeePassDX](https://www.keepassdx.com/) on my phone.
