@@ -7,7 +7,7 @@ layout: "single-notitle"
 
 I love hearing from people who care about privacy, self-hosting, and practical ways to depend less on big tech. Please reach out with feedback, collaboration ideas, or just to say hi.
 
-### Email (preferred)
+### Email
 [philipp@kullbach.net](mailto:philipp@kullbach.net) — I try to reply within a couple of days.
 
 Please use PGP encryption if possible.  
