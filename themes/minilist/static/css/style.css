@@ -61,9 +61,12 @@ body{
 
 .menu{
   display:grid;
+  grid-auto-flow:column;
+  grid-auto-rows:auto;
   grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:.6rem;
   width:100%;
+  align-items:start;
 }
 
 .menu a{
@@ -83,6 +86,27 @@ body{
 .menu a:focus-visible{
   color:var(--fg);
   background:transparent;
+}
+
+.menu-logo{
+  grid-column:1;
+  grid-row:1 / span 2;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  padding:.2rem 0;
+  color:var(--accent);
+  text-decoration:none;
+}
+
+.menu-logo svg{
+  width:72px;
+  height:72px;
+}
+
+.menu-logo:hover,
+.menu-logo:focus-visible{
+  color:var(--fg);
 }
 
 .header hr,
@@ -273,8 +297,18 @@ pre code{
     padding:1.5rem 1rem 2rem;
   }
   .menu{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-rows:repeat(3, auto);
+    grid-auto-rows:auto;
+    grid-auto-flow:row;
     gap:.6rem;
+  }
+  .menu-logo{
+    grid-row:1 / span 3;
+  }
+  .menu-logo svg{
+    width:88px;
+    height:88px;
   }
   .content{max-width:100%;}
   article{padding:0;}
