@@ -3,17 +3,13 @@ title: "Command Line"
 layout: "single-notitle"
 ---
 
-*This is a collection of CLI Tools and TUI Apps that I like to use, or just want to show off because there are cool.*
+*CLI tools and TUI apps that I use regularly.*
 
-## Why should you use terminal apps?
-> *Because you look really cool when using them*
-
-In all seriousness though - **terminal apps make using a computer more efficient.** 
-Here are my top reasons to use terminal apps:
-- **Speed** - no heavy GUI-framework
-- **Efficiently** - <code>search a directory for files with a certain ending, but exclude some file and count the lines in the selected files</code> would be very cumbersome in a GUI application, but can be doe easily in the command line. 
-- **Customization** - keybindings, layouts, looks
-- **Scripting** - everything you can to on the terminal, you can automate
+Terminal apps make using a computer more efficient:
+- **Speed** — no heavy GUI framework
+- **Flexibility** — chaining commands like searching, filtering, and counting lines is trivial on the command line
+- **Customization** — keybindings, layouts, looks
+- **Scripting** — anything you can do on the terminal, you can automate
 
 ## The Collection
 
