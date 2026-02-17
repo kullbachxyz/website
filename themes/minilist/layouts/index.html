@@ -1,21 +1,33 @@
 {{ define "main" }}
-  {{ .Content }}
+  <p>Hi I'm Philipp.<br> Welcome to my little corner of the internet. Have a look around — there might be something that interests you.</p>
 
-  {{ if .IsHome }}
-    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  <div class="home-grid">
+    <div class="home-posts">
+      <h2>Posts</h2>
+      {{ $posts := where .Site.RegularPages "Section" "posts" }}
+      {{ if gt (len $posts) 0 }}
+        <ul class="post-list">
+          {{ range $posts }}
+            <li>
+              <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+              <br>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p>No posts yet.</p>
+      {{ end }}
+    </div>
 
-    {{ if gt (len $posts) 0 }}
-      <ul class="post-list">
-        {{ range $posts }}
-          <li>
-            <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
-            <br>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          </li>
-        {{ end }}
+    <div class="home-about">
+      <h2>Links</h2>
+      <ul>
+        <li><a href="/tools">Tools and services I use</a></li>
+        <li><a href="/projects">Projects of mine</a></li>
+        <li><a href="/software">Software I use</a></li>
+        <li><a href="/hardware">Hardware I use</a></li>
       </ul>
-    {{ else }}
-      <p>No posts yet.</p>
-    {{ end }}
-  {{ end }}
+    </div>
+  </div>
 {{ end }}
