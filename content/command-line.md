@@ -1,6 +1,7 @@
 ---
 title: "Command Line"
 layout: "single-notitle"
+draft: true
 ---
 
 *CLI tools and TUI apps that I use regularly.*
