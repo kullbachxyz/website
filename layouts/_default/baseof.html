@@ -9,7 +9,7 @@
 <body>
   <div class="page{{ if .IsHome }} page-wide{{ end }}">
     <header class="header">
-      <span class="site-name">{{ if .IsHome }}kullbach.net{{ else }}{{ .Title }}{{ end }}</span>
+      {{ if .IsHome }}<span class="site-name">{{ .Title }}</span>{{ else }}<a class="site-name" href="/">{{ .Title }}</a>{{ end }}
       {{ if .IsHome }}
       <nav class="menu">
         <a href="/contact">Contact</a>

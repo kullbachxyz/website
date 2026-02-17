@@ -1,3 +1,3 @@
 ---
-title: "Philipp's Blog"
+title: "kullbach.net"
 ---
