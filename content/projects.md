@@ -3,8 +3,6 @@ title: "Projects"
 layout: "single-notitle"
 ---
 
-## Projects
-
 - [Garmr](https://github.com/kullbachxyz/garmr)
   Self-hosted dashboard for Garmin activity data.
 - [Librewolf Hardening](https://github.com/kullbachxyz/librewolf-hardening)

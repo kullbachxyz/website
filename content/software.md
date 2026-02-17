@@ -1,9 +1,7 @@
 ---
-title: "Software"
+title: "Software I use"
 layout: "single-notitle"
 ---
-
-## Software I use
 
 *Configuration for most things listed here is on my [GitHub](https://github.com/kullbachxyz).*
 

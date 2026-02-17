@@ -1,7 +1,6 @@
 baseURL = "https://kullbach.net/"
 languageCode = "en-us"
 title = "kullbach.net"
-theme = "minilist"
 
 [pagination]
   pagerSize = 5

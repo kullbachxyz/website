@@ -3,8 +3,6 @@ title: "Contact"
 layout: "single-notitle"
 ---
 
-## Contact
-
 ### Email
 
 ph [at] kullbach [dot] net
