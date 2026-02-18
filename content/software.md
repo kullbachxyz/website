@@ -3,12 +3,12 @@ title: "Software I use"
 layout: "single-notitle"
 ---
 
-*Configuration for most things listed here is on my [GitHub](https://github.com/kullbachxyz).*
+*Configuration for most things listed here is on my [GitHub](https://github.com/kullbachxyz/conf).*
 
-### OS
+### Operating System
 Arch Linux. I used Windows and macOS before - switched to macOS in 2023, then moved to Linux in mid-2025. I like Arch for the control it gives you over every package on the system.
 
-### DE/WM
+### Window Manager
 A heavily modified [build of dwm](https://github.com/kullbachxyz/dwm), with [dmenu](https://github.com/kullbachxyz/dmenu) as my launcher and [dwmblocks](https://github.com/kullbachxyz/dwmblocks) as my status bar. I've tried [MangoWC](https://github.com/DreamMaoMao/mangowc) on Wayland as well, but I need X11 for some work software.
 
 ### Terminal
