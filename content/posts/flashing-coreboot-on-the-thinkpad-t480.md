@@ -8,7 +8,7 @@ description: "A practical guide on how I flashed coreboot with the EDK2 UEFI pay
 
 ## Introduction
 
-After successfully corebooting my ThinkPad X220 a while back, I decided it was time to do the same with my ThinkPad T480. The T480 is a significantly more complex target — it has Intel Boot Guard enabled, which means you can't just dump and flash like on the older ThinkPads. Thanks to [Máté Kukri's deguard utility](https://doc.coreboot.org/soc/intel/deguard.html), which exploits a bug in the Intel Management Engine to bypass Boot Guard, this is now possible.
+After successfully corebooting my ThinkPad X220 a while back, I decided it was time to do the same with my ThinkPad T480. The T480 is a significantly more complex target - it has Intel Boot Guard enabled, which means you can't just dump and flash like on the older ThinkPads. Thanks to [Máté Kukri's deguard utility](https://doc.coreboot.org/soc/intel/deguard.html), which exploits a bug in the Intel Management Engine to bypass Boot Guard, this is now possible.
 
 My goal was to run **coreboot with EDK2** as the payload, giving me a proper UEFI environment on open source firmware.
 
@@ -47,7 +47,7 @@ Before booting the updater, go into your BIOS setup and:
 - Disable **"Secure Rollback Prevention"**
 - Enable **Legacy/CSM boot** (the updater boots in BIOS mode)
 
-Boot from the USB (F12 at startup), select option 2, and follow the instructions. Make sure you have a charged battery **and** AC power connected — the updater won't proceed without both.
+Boot from the USB (F12 at startup), select option 2, and follow the instructions. Make sure you have a charged battery **and** AC power connected - the updater won't proceed without both.
 
 Note that updating the BIOS also updates the EC firmware. The BIOS itself will be replaced by coreboot, but the EC firmware persists on a separate chip and will remain at the version you flashed.
 
@@ -59,7 +59,7 @@ Taking the T480 apart is straightforward:
 2. Remove the captive Phillips screws on the bottom cover.
 3. Gently pry off the back cover starting from the edges
 4. Lift up the clips under the battery compartment.
-5. Disconnect the internal battery, as well as the CMOS battery.
+5. Disconnect the internal battery, as well as the CMOS batter.
 
 
 {{< figure src="/images/t480-coreboot/back-panel-marked.jpg" caption="The captive Phillips screws on the bottom of the T480" >}}
@@ -101,14 +101,14 @@ No Connection  3 --|      |-- 6  CLK
 
 | Chip Pin | Function | RPi GPIO Pin            |
 |:--------:|:--------:|:------------------------|
-| 1        | CS       | GPIO 8 (CE0) — Pin 24   |
-| 2        | MISO     | GPIO 9 (MISO) — Pin 21  |
+| 1        | CS       | GPIO 8 (CE0) - Pin 24   |
+| 2        | MISO     | GPIO 9 (MISO) - Pin 21  |
 | 3        | WP       | No connection           |
-| 4        | GND      | GND — Pin 25            |
-| 5        | MOSI     | GPIO 10 (MOSI) — Pin 19 |
-| 6        | CLK      | GPIO 11 (SCLK) — Pin 23 |
+| 4        | GND      | GND - Pin 25            |
+| 5        | MOSI     | GPIO 10 (MOSI) - Pin 19 |
+| 6        | CLK      | GPIO 11 (SCLK) - Pin 23 |
 | 7        | HOLD     | No connection           |
-| 8        | VCC      | 3.3V — Pin 17           |
+| 8        | VCC      | 3.3V - Pin 17           |
 
 
 {{< figure src="/images/t480-coreboot/chip-closeup.jpg" caption="SOIC-8 clip attached to the flash chip" >}}
@@ -129,7 +129,7 @@ sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -r t480_dump3.bin
 sha256sum t480_dump*.bin
 ```
 
-All three checksums matched — good to go. **Keep a backup of this dump somewhere safe!** It's your way back to stock if anything goes wrong.
+All three checksums matched - good to go. **Keep a backup of this dump somewhere safe!** It's your way back to stock if anything goes wrong.
 
 ## Building Coreboot (on Arch Linux)
 
@@ -175,7 +175,7 @@ mv flashregion_3_gbe.bin ../../binaries/gbe.bin
 cd ../..
 ```
 
-You'll see some "Error while writing: Bad address" messages for unused regions (10–15) — these are harmless.
+You'll see some "Error while writing: Bad address" messages for unused regions (10–15) - these are harmless.
 
 ### Prepare the ME with Deguard
 
@@ -258,7 +258,7 @@ If you're on a recent version of Arch (or any distro with GCC 14+), you may hit 
 find . -path "*/host/lib/cbfstool.c" -exec sed -i \
   's/char \*end = strchr(start/const char *end = strchr(start/' {} \;
 
-# Fix EDK2 BaseTools (nuclear option — disables -Werror)
+# Fix EDK2 BaseTools (nuclear option - disables -Werror)
 sed -i 's/-Werror/-Wno-error/' \
   payloads/external/edk2/workspace/mrchromebox/BaseTools/Source/C/Makefiles/header.makefile
 ```
@@ -309,8 +309,8 @@ Coreboot with EDK2 UEFI payload, running on my ThinkPad T480.
 
 ## Post-Flash Notes
 
-- **Internal microphone**: Does not work under coreboot — this is a known issue. Honestly, the stock mic sounded terrible anyway, so not much of a loss. An external USB or Bluetooth microphone is a better option regardless.
-- **Thunderbolt & USB-C**: Works perfectly — both Thunderbolt 3 data and USB over USB-C. Make sure you've updated the Thunderbolt firmware beforehand (see Step 1).
+- **Internal microphone**: Does not work under coreboot - this is a known issue.
+- **Thunderbolt & USB-C**: Works perfectly - both Thunderbolt 3 data and USB over USB-C.
 - **Fn keys**: Some Fn+F1–F12 combos aren't handled correctly yet.
 - **thinkpad_acpi**: Add `options thinkpad_acpi force_load=1` to a file in `/etc/modprobe.d/` for fan control and thermal monitoring to work.
 - **Future updates**: Once coreboot is installed with an unlocked IFD, you can flash internally without the clip:
