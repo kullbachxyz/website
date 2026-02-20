@@ -63,6 +63,9 @@ Taking the T480 apart is straightforward:
 
 The T480 has a single **16MB SOIC-8 flash chip** (mine was a Winbond W25Q128.V), located roughly in the center of the board near the RAM.
 
+{{< figure src="/images/t480-coreboot/bios-chip-location.jpg" caption="BIOS chip location" >}}
+
+
 ### Wiring the Raspberry Pi
 
 I used the SPI pins on the Pi's GPIO header. Here are the pinouts:
