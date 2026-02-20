@@ -1,10 +1,10 @@
 +++
-date = '2026-02-19T22:23:55+01:00'
+date = '2026-01-12T22:23:55+01:00'
 draft = false
-title = 'How to Migrate GPG Keys'
+title = 'How to move GPG keys to a new system'
 +++
 
-I recently switched laptops and wanted to cleanly migrate my GPG keys from my old machine. This is a quick guide on how to do just that (and be a way for me to look this up in case I forget this lol).
+I recently switched laptops and wanted to cleanly migrate my GPG keys from my old machine. This is a quick guide on how to do just that (and be a way for me to look this up in case I forget this...).
 
 ## Check your existing keys
 ```bash
@@ -36,8 +36,10 @@ Transfer to the new machine:
 scp gpg.pub gpg.sec <IP>:
 ```
 
-## ***Optional:***  
-
 Make sure to ***shred*** these files as soon as you moved them to the new machine!
 
-## Import your key on the 
+## Import your key on the new machine
+```bash
+gpg --import gpg.pub
+gpg --import gpg.sec
+```
