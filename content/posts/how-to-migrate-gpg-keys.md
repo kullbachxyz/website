@@ -1,7 +1,7 @@
 +++
 date = '2026-01-12T22:23:55+01:00'
-draft = false
-title = 'How to move GPG keys to a new system'
+draft = true
+title = 'Moving GPG keys to a new system'
 +++
 
 I recently switched laptops and wanted to cleanly migrate my GPG keys from my old machine. This is a quick guide on how to do just that (and be a way for me to look this up in case I forget this...).

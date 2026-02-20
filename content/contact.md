@@ -5,9 +5,9 @@ layout: "single-notitle"
 
 ### Email
 
-ph [at] kullbach [dot] net
+philipp [at] kullbach [dot] net
 
-You can grab my GPG/PGP key [here](/pub).
+You can grab my GPG/PGP key [here](/philipp@kullbach.net.asc).
 
 All emails from me are signed with this fingerprint:
 
@@ -16,7 +16,7 @@ All emails from me are signed with this fingerprint:
 <!--
 ### XMPP
 
-ph [at] kullbach [dot] net
+philipp [at] kullbach [dot] net
 
 OMEMO fingerprint:
 

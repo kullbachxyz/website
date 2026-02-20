@@ -2,37 +2,34 @@
 title: "Flashing Coreboot on the ThinkPad T480"
 date: 2026-02-20
 draft: false
-tags: ["coreboot", "thinkpad", "t480", "firmware", "edk2", "uefi", "linux"]
 description: "A practical guide on how I flashed coreboot with the EDK2 UEFI payload on my Lenovo ThinkPad T480, using a Raspberry Pi 4 and an Arch Linux build machine."
 ---
 
-## Introduction
-
-After successfully corebooting my ThinkPad X220 a while back, I decided it was time to do the same with my ThinkPad T480. The T480 is a significantly more complex target - it has Intel Boot Guard enabled, which means you can't just dump and flash like on the older ThinkPads. Thanks to [Máté Kukri's deguard utility](https://doc.coreboot.org/soc/intel/deguard.html), which exploits a bug in the Intel Management Engine to bypass Boot Guard, this is now possible.
+After successfully corebooting my ThinkPad X220 a while back, I wanted to do the same with my ThinkPad T480. The T480 is quite a bit more difficult in that regard - it has Intel Boot Guard enabled, meaning you can't just dump and flash like on the older ThinkPads. The [deguard utility](https://doc.coreboot.org/soc/intel/deguard.html) from coreboot exploits a bug in the Intel Management Engine to bypass Boot Guard.
 
 My goal was to run **coreboot with EDK2** as the payload, giving me a proper UEFI environment on open source firmware.
 
-The main resource I followed was the [official coreboot documentation for the Skylake/Kabylake ThinkPads](https://doc.coreboot.org/mainboard/lenovo/skylake.html).
+The main resource I followed was the official [coreboot documentation](https://doc.coreboot.org/mainboard/lenovo/skylake.html) for the Skylake/Kabylake ThinkPads.
 
 ## My Setup
 
 - **ThinkPad T480** (i5-8250U, 16GB RAM)
-- **Raspberry Pi 4** for external SPI flashing
+- **Raspberry Pi** for external SPI flashing
 - **SOIC-8 clip** for attaching to the flash chip
-- **Arch Linux desktop** for compiling coreboot
+- **Desktop Computer** for compiling coreboot
 - A Phillips screwdriver and a spudger
 
 ## Update Firmware
 
-Before flashing coreboot, it's important to get the stock firmware to the right versions. The coreboot docs require the EC firmware to be at version **1.22 (N24HT37W)**, and any BIOS version from 1.39 to 1.54 is acceptable for EC UART support.
+Before flashing coreboot, you need to get the stock firmware to the right versions. The coreboot docs require the EC firmware to be at version **1.22 (N24HT37W)**, and any BIOS version from 1.39 to 1.54 works.
 
 ### Update the Thunderbolt Firmware
 
-The T480 shipped with a buggy Thunderbolt 3 controller firmware that writes logging data to its own flash chip. When that chip fills up, Thunderbolt and fast charging stop working. I updated mine when I first got the device. If you haven't done this yet, grab the update from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502613) and apply it while you're still on stock firmware. After this update, Thunderbolt and USB over USB-C work flawlessly, even after flashing coreboot.
+The T480 shipped with a buggy Thunderbolt 3 controller firmware that writes logging data to its own flash chip. I updated mine when I first got the device. If you haven't done this yet, grab the update from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502613) and apply it while you're still on stock firmware.
 
-### (Optional) Update the BIOS and EC
+### Update the BIOS and EC
 
-If your EC isn't at version 1.22 yet, you'll need to update. Download the BIOS update ISO from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502355) and extract the El Torito boot image to a USB stick:
+If your EC isn't at version 1.22 yet, you'll need to update that too. Download the BIOS update ISO from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502355) and extract the El Torito boot image to a USB stick:
 
 ```bash
 curl -fL -o geteltorito https://raw.githubusercontent.com/rainer042/geteltorito/refs/heads/main/geteltorito.pl
@@ -47,19 +44,16 @@ Before booting the updater, go into your BIOS setup and:
 - Disable **"Secure Rollback Prevention"**
 - Enable **Legacy/CSM boot** (the updater boots in BIOS mode)
 
-Boot from the USB (F12 at startup), select option 2, and follow the instructions. Make sure you have a charged battery **and** AC power connected - the updater won't proceed without both.
-
-Note that updating the BIOS also updates the EC firmware. The BIOS itself will be replaced by coreboot, but the EC firmware persists on a separate chip and will remain at the version you flashed.
+Boot from the USB (F12 at startup), select option 2, and follow the instructions. 
 
 ## Disassembly
 
 Taking the T480 apart is straightforward:
 
 1. Disconnect AC power and remove the external battery.
-2. Remove the captive Phillips screws on the bottom cover.
-3. Gently pry off the back cover starting from the edges
-4. Lift up the clips under the battery compartment.
-5. Disconnect the internal battery, as well as the CMOS batter.
+2. Remove the captive Phillips screws on the bottom cover, as shown in the picture below.
+3. Disconnect the internal battery, as well as the CMOS battery.
+4. Pry off the back cover, making sure to lift up the clips near the battery compartment.
 
 
 {{< figure src="/images/t480-coreboot/back-panel-marked.jpg" caption="The captive Phillips screws on the bottom of the T480" >}}
@@ -69,7 +63,7 @@ Taking the T480 apart is straightforward:
 
 The T480 has a single **16MB SOIC-8 flash chip** (mine was a Winbond W25Q128.V), located roughly in the center of the board near the RAM.
 
-### Wiring the Raspberry Pi 4
+### Wiring the Raspberry Pi
 
 I used the SPI pins on the Pi's GPIO header. Here are the pinouts:
 
@@ -83,7 +77,7 @@ No Connection  3 --|      |-- 6  CLK
           GND  4 --|______|-- 5  MOSI
 ```
 
-#### Raspberry Pi 4 GPIO Pinout
+#### Raspberry Pi GPIO Pinout
 
 ```bash
                         CS   GND
@@ -118,6 +112,21 @@ No Connection  3 --|      |-- 6  CLK
 
 Make sure SPI is enabled on the Pi (`sudo raspi-config` → Interface Options → SPI → Enable).
 
+### Installing flashrom
+
+Install the required build dependencies first:
+```bash
+sudo apt install git libpci-dev libusb-1.0 libusb-dev
+```
+
+Clone the flashrom repo, compile and install the binary:
+```bash
+git clone https://github.com/flashrom/flashrom.git
+cd flashrom
+make
+sudo make install
+```
+
 ### Reading the Flash
 
 I took three dumps and verified they all matched:
@@ -129,15 +138,13 @@ sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -r t480_dump3.bin
 sha256sum t480_dump*.bin
 ```
 
-All three checksums matched - good to go. **Keep a backup of this dump somewhere safe!** It's your way back to stock if anything goes wrong.
+## Building Coreboot
 
-## Building Coreboot (on Arch Linux)
-
-The rest of the process happened on my Arch Linux desktop.
+The rest of the process happened on my desktop computer.
 
 ### Prerequisites
 
-Install the required packages. Notably, you need `gcc-ada` (GNAT) for libgfxinit support (Intel graphics init), `nasm` for EDK2, and `imagemagick`:
+Install the required packages. You'll need `gcc-ada` (GNAT) for libgfxinit support (Intel graphics init), `nasm` for EDK2, and `imagemagick`:
 
 ```bash
 sudo pacman -S gcc-ada nasm imagemagick base-devel git python
@@ -161,7 +168,7 @@ cd ~/t480/coreboot
 make crossgcc-i386 CPUS=$(nproc)
 ```
 
-This takes a while. Make sure you have `gcc-ada` installed *before* running this, or libgfxinit won't be available and you won't have display output.
+This takes a while.
 
 ### Extract Blobs from the Stock Dump
 
@@ -175,7 +182,7 @@ mv flashregion_3_gbe.bin ../../binaries/gbe.bin
 cd ../..
 ```
 
-You'll see some "Error while writing: Bad address" messages for unused regions (10–15) - these are harmless.
+You'll probably see some "Error while writing: Bad address" messages for unused regions (10–15) - these are harmless.
 
 ### Prepare the ME with Deguard
 
@@ -251,7 +258,7 @@ make -j$(nproc)
 
 ### A Note on GCC Compatibility
 
-If you're on a recent version of Arch (or any distro with GCC 14+), you may hit `-Werror=discarded-qualifiers` errors in both vboot's `cbfstool.c` and EDK2's BaseTools. I fixed this with:
+If you're on a distro with GCC 14+, you may hit `-Werror=discarded-qualifiers` errors in both vboot's `cbfstool.c` and EDK2's BaseTools. I fixed this with:
 
 ```bash
 # Fix vboot cbfstool
@@ -267,7 +274,7 @@ After these patches, the build completed successfully.
 
 ### Inject the Original MAC Address
 
-The GBE region in the built ROM will have a generic MAC address. Since I extracted the original GBE from my stock dump, I just injected it back in to preserve my real MAC address:
+Since I extracted the original GBE from my stock dump, I injected it back in to preserve my real MAC address:
 
 ```bash
 cd util/ifdtool && make && cd ../..
@@ -281,10 +288,10 @@ mv build/coreboot.rom.new build/coreboot.rom
 Copy the ROM to the Raspberry Pi and flash:
 
 ```bash
-scp build/coreboot.rom ph@raspberrypi:~/t480/
+scp build/coreboot.rom pi@raspberrypi:~/t480/
 ```
 
-On the Pi, with the SOIC-8 clip firmly seated on the chip:
+Back to the Pi - making sure the clip has a good connection:
 
 ```bash
 sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -w coreboot.rom
@@ -297,7 +304,7 @@ Erase/write done from 0 to ffffff
 Verifying flash... VERIFIED.
 ```
 
-**VERIFIED.** The most beautiful word in the flashing world.
+**VERIFIED.**
 
 ## The Result
 
@@ -312,14 +319,14 @@ Coreboot with EDK2 UEFI payload, running on my ThinkPad T480.
 - **Internal microphone**: Does not work under coreboot - this is a known issue.
 - **Thunderbolt & USB-C**: Works perfectly - both Thunderbolt 3 data and USB over USB-C.
 - **Fn keys**: Some Fn+F1–F12 combos aren't handled correctly yet.
-- **thinkpad_acpi**: Add `options thinkpad_acpi force_load=1` to a file in `/etc/modprobe.d/` for fan control and thermal monitoring to work.
-- **Future updates**: Once coreboot is installed with an unlocked IFD, you can flash internally without the clip:
+- **thinkpad_acpi**: Add `options thinkpad_acpi force_load=1` to a file in `/etc/modprobe.d/` for fan control and thermal monitoring to work reliably.
+- **Future updates**: Once coreboot is installed, you can flash internally without the clip:
   ```bash
   sudo flashrom -p internal -w coreboot.rom --ifd -i bios -N
   ```
 
 ## Conclusion
 
-Thats it! Coming from the X220, the biggest difference is the deguard step required to bypass Boot Guard - everything else is similar. Having a full UEFI environment through EDK2 makes this feel like a proper modern firmware replacement.
+Thats it! Coming from the X220, the biggest difference is the deguard step required to bypass Boot Guard - everything else is similar.
 
 Massive thanks to [Máté Kukri](https://github.com/kukrimate) for the coreboot port and the deguard utility, and to the coreboot community for the excellent documentation.
