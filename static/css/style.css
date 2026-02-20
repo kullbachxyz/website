@@ -178,10 +178,7 @@ th, td {
 th {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: .8rem;
-  text-transform: uppercase;
   letter-spacing: .05em;
-  color: var(--muted);
   border-bottom: 2px solid var(--border);
 }
 td:last-child {
@@ -194,9 +191,9 @@ tr:last-child td {
 article img {
   max-width: 200px;
   height: auto;
-  display: inline-block;
+  display: block;
   border-radius: 0;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
 }
 
 figure {

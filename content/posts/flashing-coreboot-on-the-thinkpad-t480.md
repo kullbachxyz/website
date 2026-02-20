@@ -1,31 +1,36 @@
 ---
-title: "Flashing Coreboot on the ThinkPad T480"
+title: "Corebooting the ThinkPad T480"
 date: 2026-02-20
 draft: false
 description: "A practical guide on how I flashed coreboot with the EDK2 UEFI payload on my Lenovo ThinkPad T480, using a Raspberry Pi 4 and an Arch Linux build machine."
 ---
 
-After successfully corebooting my ThinkPad X220 a while back, I wanted to do the same with my ThinkPad T480. The T480 is quite a bit more difficult in that regard - it has Intel Boot Guard enabled, meaning you can't just dump and flash like on the older ThinkPads. The [deguard utility](https://doc.coreboot.org/soc/intel/deguard.html) from coreboot exploits a bug in the Intel Management Engine to bypass Boot Guard.
+![Coreboot Logo](/images/t480-coreboot/coreboot-logo.svg)
 
-My goal was to run **coreboot with EDK2** as the payload, giving me a proper UEFI environment on open source firmware.
+After successfully corebooting my ThinkPad X220 a while back, I decided to try the same with my ThinkPad T480. Unlike older ThinkPads, the T480 ships with Intel Boot Guard enabled, which means you can’t simply dump and flash the firmware as you could on earlier models.
 
-The main resource I followed was the official [coreboot documentation](https://doc.coreboot.org/mainboard/lenovo/skylake.html) for the Skylake/Kabylake ThinkPads.
+The [deguard utility](https://doc.coreboot.org/soc/intel/deguard.html) from coreboot exploits a vulnerability in the Intel Management Engine to bypass Boot Guard. For the payload, I chose [EDK2](https://github.com/tianocore/edk2), giving me a full UEFI implementation.
 
-## My Setup
+I mostly followed the official [coreboot documentation](https://doc.coreboot.org/mainboard/lenovo/skylake.html) for the Skylake/Kabylake ThinkPads.
+
+## The Setup
 
 - **ThinkPad T480** (i5-8250U, 16GB RAM)
-- **Raspberry Pi** for external SPI flashing
-- **SOIC-8 clip** for attaching to the flash chip
-- **Desktop Computer** for compiling coreboot
+- **Raspberry Pi** for firmware extraction and flashing
+- **SOIC-8 clip** for attaching to the BIOS chip
+- **6 F/F jumper wires** for attaching the SOIC clip to the Pi
+- **Another Computer** for compiling coreboot
 - A Phillips screwdriver and a spudger
 
 ## Update Firmware
 
-Before flashing coreboot, you need to get the stock firmware to the right versions. The coreboot docs require the EC firmware to be at version **1.22 (N24HT37W)**, and any BIOS version from 1.39 to 1.54 works.
+Before flashing coreboot, you need to get the stock firmware to the right versions. The coreboot docs require the EC firmware to be at version **1.22 (N24HT37W)**, and any BIOS version from **1.39 to 1.54** works.
 
 ### Update the Thunderbolt Firmware
 
-The T480 shipped with a buggy Thunderbolt 3 controller firmware that writes logging data to its own flash chip. I updated mine when I first got the device. If you haven't done this yet, grab the update from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502613) and apply it while you're still on stock firmware.
+The ThinkPad T480 originally shipped with a buggy Thunderbolt 3 controller firmware that repeatedly wrote diagnostic data to its own SPI flash. Over time, this excessive logging could corrupt the controller and permanently break Thunderbolt functionality. I updated mine as soon as I got the machine.
+
+If you haven't done this yet, grab the update from [Lenovo's support page](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t480-type-20l5-20l6/downloads/ds502613) and apply it while you're still on stock firmware.
 
 ### Update the BIOS and EC
 
@@ -70,12 +75,12 @@ The T480 has a single **16MB SOIC-8 flash chip** (mine was a Winbond W25Q128.V),
 
 I used the SPI pins on the Pi's GPIO header. Here are the pinouts:
 
-#### SOIC-8 Flash Chip Pinout
+#### BIOS Flash Chip Pinout
 
 ```bash
                     ______                   
-           CS  1 --|      |-- 8  VCC (3.3 V)
-         MISO  2 --| BIOS |-- 7  No Connection
+           CS  1 --|o     |-- 8  VCC (3.3 V)
+         MISO  2 --|      |-- 7  No Connection
 No Connection  3 --|      |-- 6  CLK
           GND  4 --|______|-- 5  MOSI
 ```
@@ -97,7 +102,7 @@ No Connection  3 --|      |-- 6  CLK
 #### Wiring Table
 
 | Chip Pin | Function | RPi GPIO Pin            |
-|:--------:|:--------:|:------------------------|
+|:--------:|:--------:|:-----------------------:|
 | 1        | CS       | GPIO 8 (CE0) - Pin 24   |
 | 2        | MISO     | GPIO 9 (MISO) - Pin 21  |
 | 3        | WP       | No connection           |
@@ -113,11 +118,11 @@ No Connection  3 --|      |-- 6  CLK
 
 {{< figure src="/images/t480-coreboot/rpi-connected.jpg" caption="Chip wired to the Raspberry Pi" >}}
 
-Make sure SPI is enabled on the Pi (`sudo raspi-config` → Interface Options → SPI → Enable).
+Make sure SPI is enabled on the Pi (`sudo raspi-config` -> Interface Options -> SPI -> Enable).
 
 ### Installing flashrom
 
-Install the required build dependencies first:
+Install the required build dependencies on the Pi first:
 ```bash
 sudo apt install git libpci-dev libusb-1.0 libusb-dev
 ```
@@ -229,6 +234,8 @@ cd ~/t480/deguard
 
 ### Set the HAP Bit on the IFD
 
+The HAP bit is a special flag inside the Intel firmware configuration that tells the Intel Management Engine to disable most of its functionality after early initialization. To set this in the IFD:
+
 ```bash
 cd ~/t480/coreboot
 util/ifdtool/ifdtool -p sklkbl -M 1 binaries/ifd.bin
@@ -294,12 +301,13 @@ Copy the ROM to the Raspberry Pi and flash:
 scp build/coreboot.rom pi@raspberrypi:~/t480/
 ```
 
-Back to the Pi - making sure the clip has a good connection:
+Flash the image, making sure the clip still has a good connection:
 
 ```bash
 sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -w coreboot.rom
 ```
 
+Expected Output:
 ```bash
 Found Winbond flash chip "W25Q128.V" (16384 kB, SPI) on linux_spi.
 Reading old flash chip contents... done.
@@ -307,15 +315,11 @@ Erase/write done from 0 to ffffff
 Verifying flash... VERIFIED.
 ```
 
-**VERIFIED.**
-
 ## The Result
 
-Reassembled the laptop, popped the battery in, hit the power button and...
+Reassembled the laptop, popped the battery in, hit the power button and... SUCCESS!!!
 
-{{< figure src="/images/t480-coreboot/coreboot-splash.jpg" caption="Coreboot boot screen" >}}
-
-Coreboot with EDK2 UEFI payload, running on my ThinkPad T480.
+{{< figure src="/images/t480-coreboot/coreboot-splash.jpg" caption="Coreboot with EDK2 UEFI payload, running on my ThinkPad T480" >}}
 
 ## Post-Flash Notes
 
