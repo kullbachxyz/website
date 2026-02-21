@@ -1,6 +1,6 @@
 +++
 date = '2026-01-12T22:23:55+01:00'
-draft = true
+draft = false
 title = 'Moving GPG keys to a new system'
 +++
 
