@@ -324,7 +324,7 @@ Reassembled the laptop, popped the battery in, hit the power button and... SUCCE
 ## Post-Flash Notes
 
 - **Internal microphone**: Does not work under coreboot - this is a known issue.
-- **Thunderbolt & USB-C**: Works perfectly - both Thunderbolt 3 data and USB over USB-C.
+- **Thunderbolt & USB-C**: As of March 2025, Thunderbolt data transfer is not supported upstream by [coreboot](https://review.coreboot.org/c/coreboot/+/83274). Charging, USB-C data transfer and video output through the Thunderbolt port work fine tough.
 - **Fn keys**: Some Fn+F1–F12 combos aren't handled correctly yet.
 - **thinkpad_acpi**: Add `options thinkpad_acpi force_load=1` to a file in `/etc/modprobe.d/` for fan control and thermal monitoring to work reliably.
 - **Future updates**: Once coreboot is installed, you can flash internally without the clip:
