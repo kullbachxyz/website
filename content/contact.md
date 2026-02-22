@@ -11,7 +11,7 @@ You can grab my GPG/PGP key [here](/philipp@kullbach.net.asc).
 
 All emails from me are signed with this fingerprint:
 
-`5C43 5869 1004 F29C 49C3 2F00 397E 5B17 6A4B E2D0`
+`A779 1B8A AD2E 3DE7 8F9B  8D4B D4FA 68BA 0940 466E`
 
 <!--
 ### XMPP
