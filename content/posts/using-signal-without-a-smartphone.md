@@ -4,7 +4,7 @@ draft = false
 title = 'Using Signal Without a Smartphone'
 +++
 
-This is a quick guide on how to setup <code>signal-desktop</code> without using the official Signal app, but by using the unofficial CLI tool [signal-cli](https://github.com/AsamK/signal-cli).
+This is a quick guide on how to set up <code>Signal Desktop</code> without using the official Signal app, but by using the unofficial CLI tool [signal-cli](https://github.com/AsamK/signal-cli).
 
 ## Installation
 ### Arch Linux
