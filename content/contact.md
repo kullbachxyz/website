@@ -7,7 +7,7 @@ layout: "single-notitle"
 
 philipp [at] kullbach [dot] net
 
-You can grab my GPG/PGP key [here](/philipp@kullbach.net.asc).
+You can grab my GPG/PGP key [here](/key.pub).
 
 All emails from me are signed with this fingerprint:
 
