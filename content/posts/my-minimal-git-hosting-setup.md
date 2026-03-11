@@ -1,6 +1,6 @@
 +++
 date = '2026-03-10T19:41:00+01:00'
-draft = false
+draft = true
 title = 'My Minimal Git Hosting Setup'
 +++
 
