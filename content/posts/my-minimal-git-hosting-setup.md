@@ -6,9 +6,11 @@ title = 'My Minimal Git Hosting Setup'
 
 In this tutorial will learn how to install "*your own GitHub*" on a Debian/Ubuntu server. By the end you will be able to clone repositories like you do on GitHub:
 ```bash
-git clone git@**github.com**:repo-name.git
-# Becomes
-git clone git@**git.example.org**:repo-name.git
+git clone git@github.com:repo-name.git
+```
+becomes
+```bash
+git clone git@git.example.org:repo-name.git
 ```
 
 The tutorial will cover the following parts:
@@ -128,6 +130,7 @@ cp /usr/local/share/doc/stagit/style.css /var/www/git/style.css
 You might use the repository `repo-name` that you initialized earlier.
 
 ## Setup repository metadata
+**stagit** expects the following metadata files  inside the repo: 
 ```bash
 echo "My project description"   > /var/git/myrepo.git/description
 echo "Your Name"                > /var/git/myrepo.git/owner
