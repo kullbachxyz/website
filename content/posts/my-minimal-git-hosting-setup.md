@@ -137,6 +137,27 @@ echo "Your Name"                > /var/git/myrepo.git/owner
 echo "https://example.org"   > /var/git/myrepo.git/url
 ```
 
+## Adjust the repository branch if needed
+When initializing a bare repo, git sets HEAD to `master` by default. If your commits are on a different branch, **stagit** will not find them since it reads from `HEAD` to find commits.
+
+Check which branch `HEAD` currently points to:
+```bash
+cat repo-name.git/HEAD
+# Example Output: ref: refs/heads/main
+```
+
+If it doesn't match the branch your commits are on, update `HEAD` to point to it:
+```bash
+git -C repo-name.git symbolic-ref HEAD refs/heads/main
+```
+
+Or just rename the branch before pushing:
+```bash
+git branch -m main master
+git push origin master
+```
+
+
 ## Set Up Post-Receive Hooks
 Link the `stagit-gen` script to the `post-receive` hook of the repo. This will regenerate the corresponding html page automatically on every push.
 ```bash
