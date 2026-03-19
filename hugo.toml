@@ -1,6 +1,6 @@
 baseURL = "https://kullbach.net/"
 languageCode = "en-us"
-title = "kullbach.net"
+title = "Philipp's Website"
 
 [pagination]
   pagerSize = 5
