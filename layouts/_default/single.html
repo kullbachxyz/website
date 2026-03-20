@@ -1,5 +1,6 @@
 {{ define "main" }}
 <article>
+  {{ if not .Date.IsZero }}<p class="post-date">Published on {{ .Date.Format "2 Jan 2006" }}</p>{{ end }}
   {{ .Content }}
 </article>
 {{ end }}

@@ -8,29 +8,25 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="page">
-    <header class="header">
-      {{ if .IsHome }}<span class="site-name">{{ .Title }}</span>{{ else }}<span class="post-title">{{ .Title }}</span>{{ if not .Date.IsZero }}<span class="post-date header-date">{{ .Date.Format "2 Jan 2006" }}</span>{{ end }}{{ end }}
-    </header>
-    <hr class="divider">
-    {{ if not .IsHome }}<a class="back-link" href="/">← back</a>{{ end }}
+  <header class="header">
+    {{ if .IsHome }}
+      <span class="site-name">{{ .Site.Title }}</span>
+    {{ else }}
+      <span class="site-name">{{ .Title }}</span>
+    {{ end }}
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/uses">Uses</a>
+      <a href="https://github.com/kullbachxyz" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="/contact">Contact</a>
+      <a href="/index.xml">RSS</a>
+    </nav>
+  </header>
 
-    <main class="content">
-      {{ block "main" . }}{{ end }}
-    </main>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
 
-    <hr class="divider">
-    <footer class="footer">
-      <nav class="menu">
-        <a href="/contact">contact</a>
-        <!--<span class="menu-sep"></span>
-        <a href="/key.pub">pgp</a>
-        <span class="menu-sep"></span>
-        <a href="https://github.com/kullbachxyz" target="_blank" rel="noreferrer">git</a>-->
-        <span class="menu-sep"></span>
-        <a href="/index.xml" target="_blank" rel="noreferrer">rss</a>
-      </nav>
-    </footer>
-  </div>
+  <footer></footer>
 </body>
 </html>

@@ -7,7 +7,7 @@ In order to reduce my reliance on cloud hosted services, I have made a shift to 
 
 I am going to assume you have a instance of immich running. If not, its well documented on their site.
 
-### Getting the data from iCloud
+## Getting the data from iCloud
 First I needed to download all the photos/videos from iCloud. It is important to download the files with metadata embedded, as Immich unses that data to determine what date the picture or video was taken.
 If you import a photo to your Photos app on iOS oder someone sends you a picture on WhatsApp, the metadata is often not embedded, thus immich would import it as todays date. To avoid this I used a tool called [icloudpd](https://github.com/icloud-photos-downloader/icloud_photos_downloader?tab=readme-ov-file) to download my full iCloud library. It uses docker to deploy a temporary container, so make sure you have that installed. By default it takes the date information from iCloud itself and creates a `YYYY/MM/DD` folder structure. To download my iCloud pictures i used the following command:
 ```bash
@@ -29,13 +29,13 @@ icloudpd --directory ~/icloud-download --username user@domain.com --watch-with-i
 ```
 If you get en error like `ERROR Error processing user user@domain.de, continuing with next user...` it suggest a generic problem with the account. In most cases you just need to login to the web interface and accept the terms of use.
 
-### Dealing with Live Photos
+## Dealing with Live Photos
 One small annoyance I had was Live Photos. It's a feature on iPhone, that takes a small video with the picture you have taken. I personally don't want those videos to be embedded into the pictures (alltough Immich supports that). Conveniently `icloudpd` splits Live Photos into a JPEG and a MOV file. I used this quick command to remove all the MOV files from the Live Photos:
 ```bash
 find ~/icloud-download/* -type f -iname '*_HEVC.MOV' -delete
 ``` 
 
-### Uploading to Immich
+## Uploading to Immich
 With the download and cleanup completed I used [immich-go](https://github.com/simulot/immich-go?tab=readme-ov-file) to upload the files to Immich. `immich-go` also uses the `YYYY/MM/DD` folder structure to determine the date, if no metadata data is found.
 You need to create a API key for your Immich account to upload with `immich-go`. You can to that by clicking on your profile icon and navigating to `Account Settings > API Keys > New API Key`
 I used the following command to upload:

@@ -10,11 +10,11 @@ This guide will cover the following setps:
 2. create a user with admin rights for configuration via LANconfig
 3. change the second interface to be used as WAN-Uplink
 
-### Prerequisites
+## Prerequisites
 Before configuring the vRouter, ensure that the basic setup is complete. By default, LANCOM vRouter limits LAN ports to 1 Mbit/s until install a valid license, but you can request a free 30-day trial [here](https://my.lancom-systems.de/service-support/registrierungen/demo-lizenzen/). After completing the installation for your platform using the official [Installation Guide](https://www.lancom-systems.de/download/LC-vRouter/IG_vRouter_DE.pdf), make sure to add an additional virtual LAN port to your VM. This extra interface will later be used as the WAN uplink.
 
 
-### Step 1: Set IP Address
+## Step 1: Set IP Address
 
 We first need to assign a static IP to the vRouter’s LAN-side so it can be reached from the internal network.
 ```bash
@@ -22,7 +22,7 @@ cd /Setup/TCP-IP/Network-list
 set INTRANET 10.0.99.254 255.255.255.0
 ```
 
-### Step 2: Create a User
+## Step 2: Create a User
 
 Navigate to the admin configuration directory and create a new user:
 
@@ -47,7 +47,7 @@ set Access-Rights su
 
 After completing this step, the user user is configured with supervisor rights and the specified password.
 
-### Step 3: Assign the WAN-Interface
+## Step 3: Assign the WAN-Interface
 
 As the last step you need to add the second physical interface to the same virtual network as your INTRANET network.
 
