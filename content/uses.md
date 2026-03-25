@@ -3,9 +3,8 @@ title: "Programs and Equipment I Use"
 layout: "single-notitle"
 ---
 
-*Configuration for most things listed here is on my [GitHub](https://github.com/kullbachxyz/conf).*
-
 ## Software
+*Configuration for most things listed here is on my [GitHub](https://github.com/kullbachxyz/conf).*
 
 ### Operating System
 ***Arch Linux***. I used Windows and macOS before - switched to macOS in 2023, then moved to Linux in mid-2025. I like Arch for the control it gives you over every package on the system.

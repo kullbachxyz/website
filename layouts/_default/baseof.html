@@ -11,15 +11,14 @@
     {{ if .IsHome }}
       <span class="site-name">{{ .Site.Title }}</span>
     {{ else }}
-      <span class="site-name">{{ .Title }}</span>
+      <span class="site-name"><a href="/">{{ .Title }}</a></span>
     {{ end }}
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/uses">Uses</a>
-      <a href="https://github.com/kullbachxyz" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="/contact">Contact</a>
-      <a href="/index.xml">RSS</a>
-    </nav>
+        <nav>
+          <a href="/uses">Uses</a>
+          <a href="https://github.com/kullbachxyz" target="_blank">GitHub</a>
+          <a href="/contact">Contact</a>
+          <a href="/index.xml" target="_blank">RSS</a>
+        </nav>
   </header>
 
   <main>
