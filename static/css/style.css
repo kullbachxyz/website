@@ -3,16 +3,17 @@ a { color: deepskyblue; text-decoration: none; }
 a:hover { text-decoration: underline; }
 h2 { color: orangered; text-align: center; }
 h3 { color: coral; text-align: center; }
-code { font-family: monospace; color: lime; padding: 2px 5px; font-size: 14px; }
-pre { color: lime; line-height: 24px; padding: 12px 16px; border: darkmagenta 2px groove; overflow-x: auto; }
-img { max-width: 100%; }
+h4 { color: chocolate; text-align: center; }
+code { font-family: monospace; color: orange; padding: 2px 5px; font-size: 14px; }
+pre { background-color: #2a2a2a; line-height: 24px; padding: 12px 16px; border: darkmagenta 2px groove; border-radius: 20px; overflow-x: auto; }
+img { max-width: 100%; border: 2px darkmagenta groove; border-radius: 20px; }
 table { border-collapse: collapse; width: 70%; margin: 0 auto; }
-th, td { border: 2px groove darkmagenta; padding: 3px 5px; text-align: left; }
-figcaption { text-align: center; color: dimgrey; font-size: 14px; }
-.site-name { color: orangered; font-size: 32px; font-weight: 600; }
-.post-date { color: dimgrey; font-family: monospace; font-size: 14px; }
+th, td { background-color: #2a2a2a; border: 2px groove darkmagenta; padding: 2px 4px; }
+figcaption p { margin: 0; font-family: monospace; text-align: center; color: lightgrey; font-size: 12px; }
+.site-name { font-size: 32px; font-weight: 600; }
+.post-date { color: dimgrey; font-family: monospace; font-size: 14px; padding: 0 0 5px 0; }
 .index-post-date { font-family: monospace; font-size: 14px; }
 .header { text-align: center; padding: 10px 0 20px 0; }
 .nav { padding: 10px; }
-.nav a { margin: 4px 8px 8px 0px; padding: 8px 8px 4px 8px; border: dimgrey 2px groove; }
+.nav a { margin: 4px 8px 8px 0px; padding:9px 12px 5px 12px; border: darkmagenta 2px groove; border-radius: 20px; }
 .post-list { padding: 0 0 0 12px; }
