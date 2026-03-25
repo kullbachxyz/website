@@ -16,3 +16,8 @@ figcaption p { margin: 0; font-family: monospace; text-align: center; color: lig
 .post-date { color: dimgrey; font-family: monospace; font-size: 14px; padding: 0 0 5px 0; }
 .header { text-align: center; padding: 10px 0 20px 0; }
 .post-list { padding: 0 0 0 12px; }
+@media (max-width: 450px) {
+	.post-date {
+		display: block;
+	}
+}

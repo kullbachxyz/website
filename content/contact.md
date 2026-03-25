@@ -3,7 +3,7 @@ title: "Contact"
 layout: "single-notitle"
 ---
 
-### Email
+## Email
 
 philipp [at] kullbach [dot] net
 
