@@ -1,49 +1,18 @@
-:root {
-  --bg: #f5f2ed;
-  --fg: #3a3632;
-  --accent: #5192ad;
-  --border: #d0cbc4;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #2f343f;
-    --fg: #fafafa;
-    --accent: #5294e2;
-    --border: #404552;
-  }
-}
-
-body {
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 24px;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-a { color: var(--accent); text-decoration: none; }
+body { max-width: 750px; margin: 0 auto; padding: 24px; background: #1b1b1b; color: white; font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif; font-size: 17px; line-height: 1.7; }
+a { color: deepskyblue; text-decoration: none; }
 a:hover { text-decoration: underline; }
-
-code { font-family: monospace; background: var(--border); padding: 2px 5px; font-size: 14px; }
-pre { background: var(--border); padding: 12px 16px; overflow-x: auto; }
-pre code { background: none; padding: 0; }
+h2 { color: orangered; text-align: center; }
+h3 { color: coral; text-align: center; }
+code { font-family: monospace; color: lime; padding: 2px 5px; font-size: 14px; }
+pre { color: lime; line-height: 24px; padding: 12px 16px; border: darkmagenta 2px groove; overflow-x: auto; }
 img { max-width: 100%; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
-figure { text-align: center; }
-figcaption { text-align: center; opacity: .6; font-size: 14px; }
-
-.header { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 0; text-align: center; }
-.site-name { font-size: 32px; font-weight: 600; color: var(--fg); text-decoration: none; }
-.post-date { font-family: monospace; font-size: 14px; opacity: .6; }
-
-.nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-.nav a { padding: 2px 8px; }
-
-.post-list { list-style: none; padding: 0; }
-.post-list li { display: flex; gap: 16px; }
-.post-list .post-date { min-width: 88px; flex-shrink: 0; align-self: auto; }
+table { border-collapse: collapse; width: 70%; margin: 0 auto; }
+th, td { border: 2px groove darkmagenta; padding: 3px 5px; text-align: left; }
+figcaption { text-align: center; color: dimgrey; font-size: 14px; }
+.site-name { color: orangered; font-size: 32px; font-weight: 600; }
+.post-date { color: dimgrey; font-family: monospace; font-size: 14px; }
+.index-post-date { font-family: monospace; font-size: 14px; }
+.header { text-align: center; padding: 10px 0 20px 0; }
+.nav { padding: 10px; }
+.nav a { margin: 4px 8px 8px 0px; padding: 8px 8px 4px 8px; border: dimgrey 2px groove; }
+.post-list { padding: 0 0 0 12px; }

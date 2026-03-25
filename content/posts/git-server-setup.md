@@ -1,7 +1,7 @@
 +++
 date = '2026-03-10T19:41:00+01:00'
 draft = false
-title = 'My Minimal Git Hosting Setup'
+title = 'How to setup your own Git Server'
 +++
 
 In this tutorial you will learn how to install "*your own GitHub*" on a Debian/Ubuntu server. By the end you will be able to clone repositories like you do on GitHub:

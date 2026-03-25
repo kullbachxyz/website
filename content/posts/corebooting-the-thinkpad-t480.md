@@ -5,8 +5,6 @@ draft: false
 description: "A practical guide on how I flashed coreboot with the EDK2 UEFI payload on my Lenovo ThinkPad T480, using a Raspberry Pi 4 and an Arch Linux build machine."
 ---
 
-{{< figure src="/images/t480-coreboot/coreboot-logo.svg" alt="Coreboot Logo" >}}
-
 After successfully corebooting my ThinkPad X220 a while back, I decided to try the same with my ThinkPad T480. Unlike older ThinkPads, the T480 ships with Intel Boot Guard enabled, which means you can’t simply dump and flash the firmware as you could on earlier models.
 
 The [deguard utility](https://doc.coreboot.org/soc/intel/deguard.html) from coreboot exploits a vulnerability in the Intel Management Engine to bypass Boot Guard. For the payload, I chose [EDK2](https://github.com/tianocore/edk2), giving me a full UEFI implementation.

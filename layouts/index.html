@@ -1,13 +1,12 @@
 {{ define "main" }}
   <p>Hi I'm Philipp.<br> Welcome to my little corner of the internet. Have a look around - there might be something that interests you.</p>
 
-
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
   {{ if gt (len $posts) 0 }}
     <ul class="post-list">
       {{ range $posts }}
         <li>
-          <span class="post-date">{{ .Date.Format "2006-01-02" }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="index-post-date">{{ .Date.Format "02 Jan 2006" }}<br></span><a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </li>
       {{ end }}
     </ul>
