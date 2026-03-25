@@ -1,1 +1,1 @@
-rsync -avz --delete public/ git.kullbach.net:/var/www/html/kullbach/
+rsync -avz --delete public/ kullbach.net:/var/www/html/kullbach/
