@@ -1,21 +1,129 @@
-body { max-width: 750px; margin: 0 auto; padding: 24px; background: #1b1b1b; color: white; font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif; font-size: 17px; line-height: 1.7; }
-a { color: deepskyblue; text-decoration: none; }
-a:hover { text-decoration: underline; }
-nav a { padding: 10px; }
-h2 { color: orangered; text-align: center; }
-h3 { color: coral; text-align: center; }
-h4 { color: chocolate; text-align: center; }
-code { font-family: monospace; color: orange; padding: 2px 5px; font-size: 14px; }
-pre { background-color: #2a2a2a; line-height: 24px; padding: 12px 16px; border: darkmagenta 2px groove; border-radius: 20px; overflow-x: auto; }
-img { max-width: 100%; border: 2px darkmagenta groove; border-radius: 20px; }
-table { border: 2px darkmagenta groove; width: 70%; margin: 0 auto; }
-th, td { border-collapse: collapse; border: 1px solid dimgrey; padding: 6px 8px; margin: 10px; }
-figcaption p { margin: 0; font-family: monospace; text-align: center; color: lightgrey; font-size: 12px; }
-.site-name { font-size: 36px; font-weight: 600; color: orange; }
-.site-name a { font-size: 36px; font-weight: 600; color: orange; text-decoration: none; }
-.post-date { color: dimgrey; font-family: monospace; font-size: 14px; padding: 0 0 5px 0; }
-.header { text-align: center; padding: 10px 0 20px 0; }
-.post-list { padding: 0 0 0 12px; }
+body {
+	max-width: 750px;
+	margin: 0 auto;
+	padding: 24px;
+	background: #1b1b1b;
+	color: white;
+	font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+	font-size: 17px;
+	line-height: 1.7;
+}
+
+a {
+	color: deepskyblue;
+	text-decoration: none;
+}
+
+a:hover {
+	color: orange;
+}
+
+nav a {
+	padding: 10px;
+}
+
+h1 {
+	color: orange;
+}
+
+h2 {
+	color: orangered;
+}
+
+h3 {
+	color: coral;
+}
+
+h4 {
+	color: chocolate;
+}
+
+h1,h2,h3,h4 {
+	text-align: center ;
+	clear: both ;
+}
+
+header {
+	text-align: center ;
+	padding: 15px ;
+}
+
+header h1 {
+	font-size: 30pt ;
+	margin: 0 ;
+}
+
+code {
+	font-family: monospace;
+	color: lime;
+	font-size: 14px;
+}
+
+pre {
+	background-color: #2a2a2a;
+	border: darkmagenta 2px groove;
+	line-height: 22px;
+	padding: 12px 16px;
+	border-radius: 20px;
+  white-space: pre-wrap;
+	overflow-wrap: break-word;
+  margin: 0 auto;
+}
+
+img {
+	max-width: 100%;
+	border: 2px darkmagenta groove;
+	border-radius: 20px;
+}
+
+table {
+	border: 2px darkmagenta groove;
+	width: 70%;
+	margin: 0 auto;
+}
+
+th,td {
+	border-collapse: collapse;
+	border: 1px solid dimgrey;
+	padding: 6px 8px;
+	margin: 10px;
+}
+
+figcaption p {
+	margin: 0;
+	font-family: monospace;
+	text-align: center;
+	color: lightgrey;
+	font-size: 12px;
+}
+
+.site-name {
+	font-size: 36px;
+	font-weight: 600;
+}
+
+.site-name a {
+	font-size: 36px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.post-date {
+	color: dimgrey;
+	font-family: monospace;
+	font-size: 14px;
+	padding: 0 0 5px 0;
+}
+
+.header {
+	text-align: center;
+	padding: 10px 0 20px 0;
+}
+
+.post-list {
+	padding: 0 0 0 12px;
+}
+
 @media (max-width: 450px) {
 	.post-date {
 		display: block;

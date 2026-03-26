@@ -1,6 +1,6 @@
 {{ define "main" }}
   <p>Hi I'm Philipp.<br> Welcome to my little corner of the internet. Have a look around - there might be something that interests you.</p>
-    <h2>My Blogposts</h2>
+    <a href="/posts"><h2>My Blogposts</h2><a>
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
   {{ if gt (len $posts) 0 }}
     <ul class="post-list">

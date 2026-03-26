@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
+	<link rel="canonical" href="{{ .Site.BaseURL }}">
+	<link rel='alternate' type='application/rss+xml' title="{{ .Site.Title }} RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/css/style.css'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <header class="header">
     {{ if .IsHome }}
-      <span class="site-name">{{ .Site.Title }}</span>
+      <h1>{{ .Site.Title }}</h1>
     {{ else }}
-      <span class="site-name"><a href="/">{{ .Title }}</a></span>
+      <a href="/"><h1>{{ .Title }}</h1></a>
     {{ end }}
         <nav>
           <a href="/uses">Uses</a>
