@@ -1,6 +1,6 @@
 +++
 date = '2026-03-27T20:08:06+01:00'
-draft = true
+draft = false
 title = 'Alpine Linux Install Guide'
 +++
 ## Download the iso
@@ -23,15 +23,14 @@ Change to the root user:
 ```
 su -
 ```
-Install doas:
+Install doas and vim:
 ```
-apk add doas
+apk add doas vim
 ```
 Edit the doas configuration:
 ```
 vim /etc/doas.conf
-```
-```
+---
 # Uncomment to allow group "wheel" to become root.
 permit persist :wheel
 ```
@@ -39,6 +38,24 @@ permit persist :wheel
 Add your user to the wheel group:
 ```
 adduser ph wheel
+```
+
+To check the group memberships of a user type:
+```
+getent group | grep username
+```
+
+
+## Enable community repositories
+Open the repositories configuration file:
+```
+doas vim /etc/apk/repositories
+```
+Uncomment the *community* line.
+
+Update the package-lists:
+```
+doas apk update
 ```
 
 ## (Optional) Change the default shell
@@ -55,35 +72,11 @@ Enter the new value, or press ENTER for the default
 
 To use the new shell you need to log out and back in.
 
-Create the file `~/.bashrc` - the file is loaded every time you open a terminal.
-To get a fany looking prompt add the following:
-```
-#!/usr/bin/env bash
-
-PS1='\[\e[91;1m\][\[\e[93m\]\h\[\e[92m\]@\[\e[94m\]\u\[\e[0m\] \[\e[95;1m\]\w\[\e[91m\]]\[\e[0m\]\\$ '
-```
-
-## Enable community repositories
-Install vim:
-```
-doas apk add vim
-```
-
-Open the repositories configuration file:
-```
-doas vim /etc/apk/repositories
-```
-Uncomment the *community* line.
-
-Update the package-lists:
-```
-doas apk update
-```
 
 ## Setup xorg
 Setup Xorg by typing:
 ```
-setup-xorg-base
+doas setup-xorg-base
 ```
 
 ## Fix keymap
@@ -102,7 +95,12 @@ EndSection
 
 ## Install basic programs and fonts
 ```
-doas apk add xset librewolf dunst picom xwallpaper font-hack font-noto-emoji font-noto-cjk
+doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper font-hack 
+```
+
+To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
+```
+doas apk add font-noto-emoji font-noto-cjk
 ```
 
 ## suckless software install
@@ -131,8 +129,9 @@ xset r rate 200 35 &
 
 exec dwm;
 ```
+Now log out and back in, otherwise you will get an error when trying to start X.
 
-After that's done you can start dwm by entering `startx`
+Start dwm by entering `startx`.
 
 
 
@@ -145,8 +144,7 @@ To make PipeWire work `XDG_RUNTIME_DIR` must be set in the running environment.
 Create the file `~/xprofile` - it stores the environment variables for the Xsession.
 ```
 vim ~/.xprofile
-```
-```
+---
 #!/bin/sh
 
 if test -z "${XDG_RUNTIME_DIR}"; then
@@ -200,21 +198,11 @@ Update the user directories:
 xdg-user-dirs-update
 ```
 
-
-
-
-
-# NEXT STEPS 
-
-## dbus-x11 needed?
-
-## .xprofile ausostart progrqams
-
-
-## Librewolf Configuration
-
-
-
+## Wallpaper
+Since we have xwallpaper installed we can use it to set a wallpaper within `.xprofile`:
+```
+xwallpaper --zoom ~/pics/walls/wall1.jpg &
+```
 
 ## Setup your dotfiles repo
 Set your name and email address for git:
@@ -223,17 +211,72 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```
 
+To create a new ssh key run:
+```
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+### Setup a new dotfiles repository
+Initialize the bare repo:
 ```
 git init --bare $HOME/.dotfiles
-alias conf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-conf config --local status.showUntrackedFiles no
-echo "alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 ```
+
+Add an alias for the git command targeting the dotfiles repo to your shell startup file:
+```
+~/.ashrc
+---
+
+alias conf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+```
+
+Git will show all files in `~/` as untracked files by default. To disable this type:
+```
+conf config --local status.showUntrackedFiles no
+```
+
+### Setup an existing dotfiles repository
+Initialize the bare repo and set up the alias as before. Make sure your local `HEAD` points to the corrent branch.
+
+
+Checkout the existing files in your home directory:
+```
+config checkout
+```
+
+You might get an error like this:
+```
+error: The following untracked working tree files would be overwritten by checkout:
+        .xinitrc
+        .xprofile
+Please move or remove them before you switch branches.
+Aborting
+```
+
+Remove or move the files somewhere else for now. After that run `git checkout` agian to pull from the remote.
+
+Switch to SSH auth if not already done:
+```
+git remote add "origin" git@github.com:<username>/kullbachxyz.git
+```
+
+After adding a commit push the changes:
+```
+git push --set-upstream origin main
+```
+
+
+## Librewolf Configuration
+
+
 
 ## Configuration files
 .xinitrc - Executed on startx
+
 .xprofile - Environment variables for the x session
+
 .bashrc - Per-interactive-shell startup file
+
 .bash_profile - Login shell startup file
 
 
