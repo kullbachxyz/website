@@ -41,7 +41,7 @@ Add your user to the wheel group:
 adduser ph wheel
 ```
 
-## Change the default shell
+## (Optional) Change the default shell
 Alpine comes with `/bin/sh` as its shell by default. To change it to `/bin/bash` you need to install bash itself, as well as the `shadow` package to be able to use `chsh`:
 ```
 doas apk add shadow bash
@@ -102,7 +102,7 @@ EndSection
 
 ## Install basic programs and fonts
 ```
-doas apk add xset dbus-x11 librewolf dunst picom xwallpaper font-hack font-noto-emoji font-noto-cjk
+doas apk add xset librewolf dunst picom xwallpaper font-hack font-noto-emoji font-noto-cjk
 ```
 
 ## suckless software install
@@ -165,7 +165,48 @@ export "$(dbus-launch)"
 Add `. "$HOME/.xprofile"` to your `.xinitrc` to source it when xinit is executed.
 
 
+# Setup XDG user dirs
+
+Install `xdg-user-dirs´:
+```
+doas apk add xdg-user-dirs
+```
+
+Create custom directories:
+```
+mkdir ~/docs
+mkdir ~/dl
+mkdir ~/music
+mkdir ~/pics
+mkdir ~/vids
+```
+
+Create the configuration file:
+```
+~/.config/user-dirs.dirs
+---
+XDG_DOCUMENTS_DIR="$HOME/docs"
+XDG_DOWNLOAD_DIR="$HOME/dl"
+XDG_MUSIC_DIR="$HOME/music"
+XDG_PICTURES_DIR="$HOME/pics"
+XDG_VIDEOS_DIR="$HOME/vids"
+XDG_DESKTOP_DIR="$HOME/"
+XDG_TEMPLATES_DIR="$HOME/"
+XDG_PUBLICSHARE_DIR="$HOME/"
+```
+
+Update the user directories:
+```
+xdg-user-dirs-update
+```
+
+
+
+
+
 # NEXT STEPS 
+
+## dbus-x11 needed?
 
 ## .xprofile ausostart progrqams
 
@@ -195,8 +236,4 @@ echo "alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOM
 .bashrc - Per-interactive-shell startup file
 .bash_profile - Login shell startup file
 
-# Setup XDG user dirs
-```bash
-mkdir -p "${HOME}/docs" "${HOME}/music" "${HOME}/pics" "${HOME}/vids" "${HOME}/dl"
-```
 
