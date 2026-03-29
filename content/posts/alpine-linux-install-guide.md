@@ -3,6 +3,14 @@ date = '2026-03-27T20:08:06+01:00'
 draft = false
 title = 'Alpine Linux Install Guide'
 +++
+
+<!--
+ToDo:
+- Run through the dotfiles setup again and check everthing works
+- Improve introduction
+- Explain the configuration files in more detail
+- [maybe] Add a more detailed program list
+-->
 ## Download the iso
 Head over to https://alpinelinux.org/downloads/
 In the **Standard** section, choose the **x86_64** version.
@@ -35,14 +43,14 @@ vim /etc/doas.conf
 permit persist :wheel
 ```
 
-Add your user to the wheel group:
+To check the group memberships your user type:
 ```
-adduser ph wheel
+getent group | grep <username>
 ```
 
-To check the group memberships of a user type:
+If your user is not a member of the `wheel` group, you can add your user with this command:
 ```
-getent group | grep username
+adduser <username> wheel
 ```
 
 
@@ -63,9 +71,9 @@ Alpine comes with `/bin/sh` as its shell by default. To change it to `/bin/bash`
 ```
 doas apk add shadow bash
 ```
-Type `chsh ph` and enter `/bin/bash/`:
+Type `chsh <username>` and enter `/bin/bash/`:
 ```
-Changing the login shell for ph
+Changing the login shell for <username>
 Enter the new value, or press ENTER for the default
         Login Shell [/bin/sh]: /bin/bash
 ```
@@ -80,17 +88,35 @@ doas setup-xorg-base
 ```
 
 ## Fix keymap
-During the base install we set up the keymap, but only for tty sessions. To set the keymap in X11 first install `setxkbmap`:
-```
-doas apk add setxkbmap
-```
-Add following to `/etc/X11/xorg.conf`:
+During the base install we set up the keymap, but only for tty sessions. To set the keymap in X11, add following to `/etc/X11/xorg.conf`:
 ```
 Section "InputClass"
     Identifier  "Keyboard Default"
     MatchIsKeyboard "yes"
     Option      "XkbLayout" "de"
 EndSection
+```
+
+## Setup the login profile
+The `.profile` file is used for customizing the user environment. It stores everything that should be run at tty login.
+```
+~/.profile
+---
+#!/bin/sh
+# set ENV to a file invoked each time sh is started for interactive use.
+export ENV="$HOME/.ashrc"
+
+# Add scripts to $PATH
+PATH="$PATH:$(find ~/.local/bin -type d)"
+
+# Default programs
+export BROWSER="librewolf"
+export EDITOR="vim"
+export TERMINAL="st"
+export READER="zathura"
+
+# Automatically start dwm in tty
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx
 ```
 
 ## Install basic programs and fonts
@@ -103,7 +129,7 @@ To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
 doas apk add font-noto-emoji font-noto-cjk
 ```
 
-## suckless software install
+## Suckless software install
 Install build dependencies:
 ```
 doas apk add git make gcc g++ libx11-dev libxft-dev libxinerama-dev ncurses 
@@ -123,16 +149,15 @@ git clone https://codeberg.org/kullbachxyz/dmenu.git
 
 Go into each folder and run `doas make clean install`.
 
-To tell Xorg what to do when starting you need to create the file ~/.xinitrc:
+To tell Xorg what to do when starting you need to create the file ~/.xinitrc and add the execution command for dwm:
 ```
-xset r rate 200 35 &
-
-exec dwm;
+ echo "exec dwm" >> ~/.xinitrc 
 ```
 Now log out and back in, otherwise you will get an error when trying to start X.
 
-Start dwm by entering `startx`.
+Sine we added `[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx` in `~/.profile`, dwm should start automatically. 
 
+If you have not added that line, you can start dwm by entering `startx`.
 
 
 ## Setup audio
@@ -143,7 +168,7 @@ doas apk add pipewire wireplumber pipewire-pulse pipewire-pulse pipewire-pulse p
 To make PipeWire work `XDG_RUNTIME_DIR` must be set in the running environment.
 Create the file `~/xprofile` - it stores the environment variables for the Xsession.
 ```
-vim ~/.xprofile
+~/.xprofile
 ---
 #!/bin/sh
 
@@ -160,10 +185,10 @@ export "$(dbus-launch)"
 /usr/libexec/pipewire-launcher &
 ```
 
-Add `. "$HOME/.xprofile"` to your `.xinitrc` to source it when xinit is executed.
+Add `. "$HOME/.xprofile"` to your `~/.xinitrc` to source it when xinit is executed.
 
 
-# Setup XDG user dirs
+## Setup XDG user dirs
 
 Install `xdg-user-dirs´:
 ```
@@ -257,7 +282,7 @@ Remove or move the files somewhere else for now. After that run `git checkout` a
 
 Switch to SSH auth if not already done:
 ```
-git remote add "origin" git@github.com:<username>/kullbachxyz.git
+git remote add "origin" git@github.com:<username>/dotfiles.git
 ```
 
 After adding a commit push the changes:
@@ -265,18 +290,14 @@ After adding a commit push the changes:
 git push --set-upstream origin main
 ```
 
-
-## Librewolf Configuration
-
-
-
 ## Configuration files
+.profile - Login shell startup file (tty)
+
 .xinitrc - Executed on startx
 
 .xprofile - Environment variables for the x session
 
-.bashrc - Per-interactive-shell startup file
+.ashrc - Per-interactive-shell startup file
 
-.bash_profile - Login shell startup file
 
 
