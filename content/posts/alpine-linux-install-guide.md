@@ -6,21 +6,31 @@ title = 'Alpine Linux Install Guide'
 
 <!--
 ToDo:
-- Run through the dotfiles setup again and check everthing works
-- Improve introduction
+- Run through the dotfiles setup again and check everything works
+- Re-write statusbar scripts and make them as simple as possible (maybe even no clicking needed).
 - Explain the configuration files in more detail
 - [maybe] Add a more detailed program list
+- [DONE] Improve introduction
 -->
-## Download the iso
-Head over to https://alpinelinux.org/downloads/
+
+Alpine Linux is a very lightweight Linux distribution. In comparison to other distributions like Debian or Arch Linux it uses simpler implementations of the **core utils** (commands like `ls`, `cp` or `cat`) and the **OpenRC init system** (service control, including boot and shutdown). Alpine also has a very efficient package manager called `apk`.
+
+The following article is about how I like set up a new system.
+
+## Download the ISO
+Visit the [download page](https://alpinelinux.org/downloads/).
 In the **Standard** section, choose the **x86_64** version.
 
-## Write image to usb
+## Prepare the USB
+If you are on Windows you can use **Rufus** to flash the image to the USB drive. On Mac or Linux you can simply use `dd`:
 ```
-dd if=alpine-standard-*-x86_64.iso of=/dev/sdb bs=8M status=progress
+dd if=alpine-standard-3.23.3-x86_64.iso of=/dev/sdX bs=4M status=progress; eject /dev/sdX
 ```
-## Boot from usb
-Login with username root (no password) and launch the base installer by typing:
+
+## Start base installer
+After the installer has loaded, login with username `root` and no password.
+
+Alpine comes with a convenient install script that automates the basic installation steps like partitioning, user creation and kernel install. Launch the base installer by typing:
 ```
 setup-alpine
 ```
@@ -261,12 +271,28 @@ conf config --local status.showUntrackedFiles no
 ```
 
 ### Setup an existing dotfiles repository
-Initialize the bare repo and set up the alias as before. Make sure your local `HEAD` points to the corrent branch.
+Initialize the bare repo and set up the alias as before.
 
-
-Checkout the existing files in your home directory:
+Add the remote:
 ```
-config checkout
+conf remote add origin git@github.com:<username>/dotfiles.git
+```
+
+Download the remote:
+```
+conf fetch origin
+```
+
+Check the remote branches:
+```
+conf branch -r
+```
+
+Switch to the correct remote branch:
+```
+conf switch -c main origin/main
+# or
+conf switch -c master origin/master
 ```
 
 You might get an error like this:
@@ -278,16 +304,11 @@ Please move or remove them before you switch branches.
 Aborting
 ```
 
-Remove or move the files somewhere else for now. After that run `git checkout` agian to pull from the remote.
-
-Switch to SSH auth if not already done:
-```
-git remote add "origin" git@github.com:<username>/dotfiles.git
-```
+Move the files to a temporary backup location and re-run the `conf switch` command like before.
 
 After adding a commit push the changes:
 ```
-git push --set-upstream origin main
+conf push --set-upstream origin main
 ```
 
 ## Configuration files
