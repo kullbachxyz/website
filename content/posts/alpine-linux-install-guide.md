@@ -63,6 +63,7 @@ If your user is not a member of the `wheel` group, you can add your user with th
 adduser <username> wheel
 ```
 
+Change back to your non-root user by typing `exit`.
 
 ## Enable community repositories
 Open the repositories configuration file:
@@ -98,6 +99,7 @@ doas setup-xorg-base
 ```
 
 ## Fix keymap
+[add doas here]
 During the base install we set up the keymap, but only for tty sessions. To set the keymap in X11, add following to `/etc/X11/xorg.conf`:
 ```
 Section "InputClass"
@@ -106,6 +108,10 @@ Section "InputClass"
     Option      "XkbLayout" "de"
 EndSection
 ```
+<br>
+
+***If you plan to [setup existing dotfiles](/setup-your-dotfiles-repo), it would be easiest to do this now.***
+
 
 ## Setup the login profile
 The `.profile` file is used for customizing the user environment. It stores everything that should be run at tty login.
@@ -195,8 +201,55 @@ export "$(dbus-launch)"
 /usr/libexec/pipewire-launcher &
 ```
 
+<!-- figure out why `rc-update -U add pipewire default` says `XDG_RUNTIME_DIR unset.` -->
+
 Add `. "$HOME/.xprofile"` to your `~/.xinitrc` to source it when xinit is executed.
 
+## Setup Wifi
+Alpine uses `wpa_supplicant` for wifi by default with the `networking` service. To make it easier to administer wifi configuration, install **NetworkManager**.
+The packages needed are:
+```
+doas apk add networkmanager networkmanager-wifi networkmanager-tui
+```
+<!--Add doas here-->
+Add the following to the /etc/NetworkManager/NetworkManager.conf file as follows:
+```
+/etc/NetworkManager/NetworkManager.conf
+---
+[main] 
+dhcp=internal
+plugins=ifupdown,keyfile
+
+[ifupdown]
+managed=true
+
+[device]
+wifi.scan-rand-mac-address=yes
+wifi.backend=wpa_supplicant
+```
+
+ Now you need to stop conflicting services:
+```
+doas rc-service networking stop
+doas rc-service wpa_supplicant stop 
+```
+
+Now restart NetworkManager:
+```
+doas rc-service networkmanager restart
+```
+
+Now connect to a network with `doas nmtui`. If that works, you can disable `networking` and `wpa_supplicant` and enable `networkmanager` on boot:
+```
+doas rc-update add networkmanager default
+doas rc-update del networking boot
+
+# Only needed if you connected via wifi during install
+doas rc-update del wpa_supplicant boot
+```
+<!--figure out why`adduser ph plugdev` did not work (nmtui still says not permitted) -->
+
+To add a new wifi connection, you can type `doas nmtui` in the terminal.
 
 ## Setup XDG user dirs
 
