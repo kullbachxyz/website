@@ -106,9 +106,10 @@ doas setup-xorg-base
 ```
 
 ## Fix keymap
-[add doas here]
 During the base install we set up the keymap, but only for tty sessions. To set the keymap in X11, add following to `/etc/X11/xorg.conf`:
 ```
+doas vim /etc/X11/xorg.conf
+---
 Section "InputClass"
     Identifier  "Keyboard Default"
     MatchIsKeyboard "yes"
@@ -123,7 +124,7 @@ EndSection
 ## Setup the login profile
 The `.profile` file is used for customizing the user environment. It stores everything that should be run at tty login.
 ```
-~/.profile
+vim ~/.profile
 ---
 #!/bin/sh
 # set ENV to a file invoked each time sh is started for interactive use.
@@ -166,6 +167,7 @@ mkdir -p ~/.local/src
 Clone source for dwm, st and dmenu:
 ```
 git clone https://codeberg.org/kullbachxyz/dwm.git
+git clone https://codeberg.org/kullbachxyz/dwmblocks.git
 git clone https://codeberg.org/kullbachxyz/st.git
 git clone https://codeberg.org/kullbachxyz/dmenu.git
 ```
@@ -191,7 +193,7 @@ doas apk add pipewire wireplumber pipewire-pulse pipewire-pulse pipewire-pulse p
 To make PipeWire work `XDG_RUNTIME_DIR` must be set in the running environment.
 Create the file `~/xprofile` - it stores the environment variables for the Xsession.
 ```
-~/.xprofile
+vim ~/.xprofile
 ---
 #!/bin/sh
 
@@ -308,7 +310,7 @@ mkdir ~/vids
 
 Create the configuration file:
 ```
-~/.config/user-dirs.dirs
+vim ~/.config/user-dirs.dirs
 ---
 XDG_DOCUMENTS_DIR="$HOME/docs"
 XDG_DOWNLOAD_DIR="$HOME/dl"
@@ -326,7 +328,7 @@ xdg-user-dirs-update
 ```
 
 ## Wallpaper
-Since we have xwallpaper installed we can use it to set a wallpaper within `.xprofile`:
+Since we have xwallpaper installed we can use it to set a wallpaper in `.xprofile`:
 ```
 xwallpaper --zoom ~/pics/walls/wall1.jpg &
 ```
@@ -334,8 +336,8 @@ xwallpaper --zoom ~/pics/walls/wall1.jpg &
 ## Setup your dotfiles repo
 Set your name and email address for git:
 ```
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
+git config --global user.name "Your Name"
+git config --global user.email your_email@example.com
 ```
 
 To create a new ssh key run:
@@ -351,7 +353,7 @@ git init --bare $HOME/.dotfiles
 
 Add an alias for the git command targeting the dotfiles repo to your shell startup file:
 ```
-~/.ashrc
+vim ~/.ashrc
 ---
 
 alias conf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -403,14 +405,34 @@ After adding a commit push the changes:
 conf push --set-upstream origin main
 ```
 
+## Command Reference
+
+### Package Management
+| Command | Description |
+|--|--|
+| (`doas`) `apk update` | Update repository metadata |
+| (`doas`) `apk upgrade` | Upgrade all packages |
+| `apk search <name>` | Search for a package |
+| (`doas`) `apk add <name>` | Install a package |
+| (`doas`) `apk del <name>` | Uninstall a package |
+
+
+### Package Management
+| Command | Description |
+|--|--|
+| `rc-status` | Show enabled services |
+| (`doas`) `rc-service start <service>` | Stop a service |
+| (`doas`) `rc-service stop <service>` | Stop a service |
+| (`doas`) `rc-service restart <service>` | Restart a service |
+
+
 ## Configuration files
+
 .profile - Login shell startup file (tty)
 
-.xinitrc - Executed on startx
+.xinitrc - Executed on startx ("Autostart file")
 
 .xprofile - Environment variables for the x session
 
 .ashrc - Per-interactive-shell startup file
-
-
 
