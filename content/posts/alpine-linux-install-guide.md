@@ -13,35 +13,42 @@ ToDo:
 - [DONE] Improve introduction
 -->
 
-Alpine Linux is a very lightweight Linux distribution. In comparison to other distributions like Debian or Arch Linux it uses simpler implementations of the **core utils** (commands like `ls`, `cp` or `cat`) and the **OpenRC init system** (service control, including boot and shutdown). Alpine also has a very efficient package manager called `apk`.
+Alpine Linux is a lightweight and small Linux distribution. In comparison to other distributions like Debian or Ubuntu it uses simpler versions of the **core utils** (commands like *ls*, *cp* or *cat*), the **OpenRC init system** (systemd alternative) and **musl** instead of the **glibc** standard C library. Alpine also has a very efficient package manager called *apk*. Therefore Alpine is often used in resource-limited environments like containers. It also works great as a general-purpose system. 
 
-The following article is about how I like set up a new system.
+The following article is about how I like set up a new install of Alpine.
 
 ## Download the ISO
-Visit the [download page](https://alpinelinux.org/downloads/).
+Visit the [download page](https://alpinelinux.org/downloads/) of Alpine.
 In the **Standard** section, choose the **x86_64** version.
 
 ## Prepare the USB
 If you are on Windows you can use **Rufus** to flash the image to the USB drive. On Mac or Linux you can simply use `dd`:
 ```
-dd if=alpine-standard-3.23.3-x86_64.iso of=/dev/sdX bs=4M status=progress; eject /dev/sdX
+# Replace sdX with the device identifier of your USB
+dd if=alpine-standard-3.23.3-x86_64.iso of=/dev/sdX bs=8M status=progress
 ```
 
 ## Start base installer
 After the installer has loaded, login with username `root` and no password.
 
-Alpine comes with a convenient install script that automates the basic installation steps like partitioning, user creation and kernel install. Launch the base installer by typing:
+Alpine comes with a convenient install script that automates the basic installation steps like partitioning, user creation and the general system install. Launch the base installer by typing:
 ```
 setup-alpine
 ```
-Follow the instructions on screen.
+Follow the instructions on screen and make sure to create a non-root user in addition to setting the root password.
+
+After rebooting, login with your newly created user.
 
 ## Install doas
-Change to the root user:
+To do do basic tasks on a system it is a general security practice to not use the `root` user, but use a dedicated non-root user instead. To execute commands that require root permissions you could switch to the root user, but it is better to use a helper program to execute just that command as root.
+
+If you have used Linux before you probably now the most popular privilege escalation command `sudo`. A simpler, more lightweight alternative is `doas`.
+
+To install it, change to the root user:
 ```
 su -
 ```
-Install doas and vim:
+Install `doas` and `vim` (or the editor of your choice):
 ```
 apk add doas vim
 ```
@@ -211,10 +218,11 @@ The packages needed are:
 ```
 doas apk add networkmanager networkmanager-wifi networkmanager-tui
 ```
-<!--Add doas here-->
+
+
 Add the following to the /etc/NetworkManager/NetworkManager.conf file as follows:
 ```
-/etc/NetworkManager/NetworkManager.conf
+doas vim /etc/NetworkManager/NetworkManager.conf
 ---
 [main] 
 dhcp=internal
@@ -247,9 +255,40 @@ doas rc-update del networking boot
 # Only needed if you connected via wifi during install
 doas rc-update del wpa_supplicant boot
 ```
-<!--figure out why`adduser ph plugdev` did not work (nmtui still says not permitted) -->
-
 To add a new wifi connection, you can type `doas nmtui` in the terminal.
+
+If you want to configure wifi-settings without root you will need to add a polkit rule.
+`polkit` is a so called "authorization-manager", meaning it allows to configure rules to make standard users to execute commands that normally require root.
+Install polkit:
+```
+doas apk add polkit polkit-elogind
+```
+
+Add polkit to start automatically on boot:
+```
+doas apk add polkit polkit-elogind
+```
+
+Create the rule:
+```
+doas vim /etc/polkit-1/rules.d/49-nm-wheel.rules
+---
+polkit.addRule(function(action, subject) {
+    // Allow wheel group users to manage NetworkManager
+    if ((action.id == "org.freedesktop.NetworkManager.settings.modify.system" ||
+         action.id == "org.freedesktop.NetworkManager.network-control") &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+```
+
+Start polkit and restart NetworkManager as well:
+```
+doas rc-service polkit start
+doas rc-service networkmanager restart
+```
+
 
 ## Setup XDG user dirs
 
