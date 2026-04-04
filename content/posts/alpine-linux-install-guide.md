@@ -29,6 +29,7 @@ Besides the programs installed by the basic install script, I like to install th
 | eudev | watches for kernel events regarding new devices |
 | mesa-dri-gallium | 3D graphics library |
 | xset | set various user preference options |
+| xrandr | X11 window resizing |
 | util-linux | various linux utilities |
 | dbus-x11 | allows communication between processes |
 | librewolf | web browser |
@@ -38,6 +39,7 @@ Besides the programs installed by the basic install script, I like to install th
 | zathura | document viewer |
 | zathura-mupdf | PDF and EPUB compatibility for zathura |
 | lf | terminal file manager |
+| maim | screenshot utility |
 | font-hack | monospace font |
 | noto-fonts | extensive font package |
 | font-noto-emoji | emoji font |
@@ -194,7 +196,7 @@ export READER="zathura"
 
 ## Install basic programs and fonts
 ```
-doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper brightnessctl zathura zathura-mupdf lf font-hack 
+doas apk add xset xrandr util-linux dbus-x11 librewolf dunst xwallpaper brightnessctl zathura zathura-mupdf lf maim font-hack 
 ```
 
 To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
