@@ -39,6 +39,7 @@ Besides the programs installed by the basic install script, I like to install th
 | zathura | document viewer |
 | zathura-mupdf | PDF and EPUB compatibility for zathura |
 | lf | terminal file manager |
+| nsxiv | simple image viewer |
 | maim | screenshot utility |
 | font-hack | monospace font |
 | noto-fonts | extensive font package |
@@ -196,7 +197,7 @@ export READER="zathura"
 
 ## Install basic programs and fonts
 ```
-doas apk add xset xrandr util-linux dbus-x11 librewolf dunst xwallpaper brightnessctl zathura zathura-mupdf lf maim font-hack 
+doas apk add xset xrandr util-linux dbus-x11 librewolf dunst xwallpaper brightnessctl zathura zathura-mupdf lf nsxiv maim font-hack 
 ```
 
 To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
