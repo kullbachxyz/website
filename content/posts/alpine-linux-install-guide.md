@@ -17,11 +17,59 @@ Alpine Linux is a lightweight and small Linux distribution. In comparison to oth
 
 The following article is about how I like set up a new install of Alpine.
 
+Besides the programs installed by the basic install script, I like to install the following:
+| Name | Purpose |
+|-|-|
+| doas | run programs as root |
+| vim | text editor |
+| shadow | login and passwd utilities |
+| xorg-server | display server |
+| xf86-input-libinput | X.Org input driver |
+| xinit | X.Org initialisation program |
+| eudev | watches for kernel events regarding new devices |
+| mesa-dri-gallium | 3D graphics library |
+| xset | set various user preference options |
+| util-linux | various linux utilities |
+| dbus-x11 | allows communication between processes |
+| librewolf | web browser |
+| dunst | notification daemon |
+| xwallpaper | wallpaper setting utility |
+| zathura | document viewer |
+| zathura-mupdf | PDF and EPUB compatibility for zathura |
+| lf | terminal file manager |
+| font-hack | monospace font |
+| noto-fonts | extensive font package |
+| font-noto-emoji | emoji font |
+| font-noto-cjk | CJK languages (Chinese, Japanese, Korean) |
+| git | version control system |
+| make | build process tool |
+| gcc | GNU compiler collection |
+| g++ | C++ library and compiler |
+| libx11-dev | X11 client-side library |
+| libxft-dev | font drawing library for X |
+| libxinerama-dev | multi monitor support |
+| ncurses | console display library |
+| dwm | window manager |
+| dwmblocks | statusbar |
+| st | terminal |
+| dmenu | program launcher |
+| pipewire | audio system |
+| wireplumber | session and policy manager for pipewire |
+| pipewire-jack | JACK support for pipewire |
+| pipewire-pulse | Pulseaudio support for pipewire |
+| pipewire-alsa | ALSA support for pipewire |
+| pamixer | pulseaudio command line mixer |
+| pulsemixer | TUI mixer for pulseaudio |
+| networkmanager | network management daemon |
+| networkmanager-wifi | wifi plugin for networkmanager |
+| networkmanager-tui | text-based user interface for networkmanager |
+| xdg-user-dirs | manage user directories |
+
 ## Download the ISO
 Visit the [download page](https://alpinelinux.org/downloads/) of Alpine.
 In the **Standard** section, choose the **x86_64** version.
 
-## Prepare the USB
+## Flash the ISO
 If you are on Windows you can use **Rufus** to flash the image to the USB drive. On Mac or Linux you can simply use `dd`:
 ```
 # Replace sdX with the device identifier of your USB
@@ -118,7 +166,7 @@ EndSection
 ```
 <br>
 
-***If you plan to [setup existing dotfiles](/setup-your-dotfiles-repo), it would be easiest to do this now.***
+***If you plan to [setup existing dotfiles](#setup-your-dotfiles-repo), it would be easiest to do this now.***
 
 
 ## Setup the login profile
@@ -145,7 +193,7 @@ export READER="zathura"
 
 ## Install basic programs and fonts
 ```
-doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper font-hack 
+doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper zathura zathura-mupdf lf font-hack 
 ```
 
 To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
@@ -188,7 +236,7 @@ If you have not added that line, you can start dwm by entering `startx`.
 ## Setup audio
 Install required packages:
 ```
-doas apk add pipewire wireplumber pipewire-pulse pipewire-pulse pipewire-pulse pamixer pulsemixer
+doas apk add pipewire wireplumber pipewire-pulse pipewire-alsa pamixer pulsemixer
 ```
 To make PipeWire work `XDG_RUNTIME_DIR` must be set in the running environment.
 Create the file `~/xprofile` - it stores the environment variables for the Xsession.
@@ -333,6 +381,29 @@ Since we have xwallpaper installed we can use it to set a wallpaper in `.xprofil
 xwallpaper --zoom ~/pics/walls/wall1.jpg &
 ```
 
+## Printer setup
+Install **CUPS**:
+```
+doas apk add cups cups-filters
+```
+
+Add your user to the `lpadmin` group:
+```
+doas adduser <user> lpadmin
+```
+
+Enable and start the CUPS service:
+```
+doas rc-update add cupsd
+doas rc-service cupsd start
+```
+
+Add a printer:
+```
+lpadmin -p <printername> -E -v "ipp://<printer-ip-address>/ipp/print" -m everywhere
+```
+
+
 ## Setup your dotfiles repo
 Set your name and email address for git:
 ```
@@ -427,12 +498,13 @@ conf push --set-upstream origin main
 
 
 ## Configuration files
+Below is a quick summary of the configuration files that were created during this tutorial: 
 
-.profile - Login shell startup file (tty)
+`.profile` - Login shell startup file (tty)
 
-.xinitrc - Executed on startx ("Autostart file")
+`.xinitrc` - Executed on startx ("Autostart file")
 
-.xprofile - Environment variables for the x session
+`.xprofile` - Environment variables for the x session
 
-.ashrc - Per-interactive-shell startup file
+`.ashrc` - Per-interactive-shell startup file
 
