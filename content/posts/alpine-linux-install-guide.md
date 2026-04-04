@@ -34,6 +34,7 @@ Besides the programs installed by the basic install script, I like to install th
 | librewolf | web browser |
 | dunst | notification daemon |
 | xwallpaper | wallpaper setting utility |
+| brightnessctl | control brightness of laptop screen |
 | zathura | document viewer |
 | zathura-mupdf | PDF and EPUB compatibility for zathura |
 | lf | terminal file manager |
@@ -193,7 +194,7 @@ export READER="zathura"
 
 ## Install basic programs and fonts
 ```
-doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper zathura zathura-mupdf lf font-hack 
+doas apk add xset util-linux dbus-x11 librewolf dunst xwallpaper brightnessctl zathura zathura-mupdf lf font-hack 
 ```
 
 To support Emojis, as well as Chinese, Japanese, and Korean characters, install:
