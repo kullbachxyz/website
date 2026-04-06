@@ -53,6 +53,8 @@ Besides the programs installed by the basic install script, I like to install th
 | libxft-dev | font drawing library for X |
 | libxinerama-dev | multi monitor support |
 | ncurses | console display library |
+| patch | to patch suckless tools |
+| xsetroot | to get a status bar in dwm |
 | dwm | window manager |
 | dwmblocks | statusbar |
 | st | terminal |
@@ -208,7 +210,7 @@ doas apk add font-noto-emoji font-noto-cjk
 ## Suckless software install
 Install build dependencies:
 ```
-doas apk add git make gcc g++ libx11-dev libxft-dev libxinerama-dev ncurses 
+doas apk add git make gcc g++ libx11-dev libxft-dev libxinerama-dev ncurses patch xsetroot
 ```
 
 Create a source build folder:
